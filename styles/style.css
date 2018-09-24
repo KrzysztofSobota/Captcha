@@ -1,0 +1,82 @@
+html, body {
+  width: 1200px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #234567;
+}
+
+.container {
+  position: absolute;
+	width: 800px;
+	min-height: 200px;
+	height: auto;
+  left: 25%;
+	background-color: #6893bf;
+}
+
+.captcha, .answer {
+	width: 400px;
+	height: 100px;
+	margin: 10px 25%;
+	background-color: #ffdfdf;
+	float: left;
+}
+
+.something {
+  position: relative;
+  width: 75%;
+  height: auto;
+	float: left;
+}
+
+.symbol {
+	width: 15%;
+	height: inherit;
+	font: normal 60px Tahoma sans-serif;
+	background-color: transparent;
+	float: left;
+}
+
+.rewrite {
+	width: 100px;
+	height: inherit;
+	background-color: #a6be81;  
+	float: right;
+}
+
+.rewrite > p {
+  display: inline-block;
+  margin: 30px 10px;
+  text-align: center;
+  font: bold 24px Tahoma;
+}
+
+.answer {
+	height: auto;
+	margin: 10px 25% 30px;
+	background-color: white;
+}
+
+.yourcode {
+  width: 74%;
+  height: 1.55em;
+  line-height: 1em;
+  float: left;
+}
+
+.btn {
+  width: 25%;
+  height: 2em;
+  float: left;
+}
+
+footer {
+  width: auto;
+  min-height: 1.5em;
+  height: 40px;
+  padding: 5px 8px;
+  background-color: beige;
+  font: italic 20px Helvetica;
+  clear: both;
+}

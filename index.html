@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My New Pen!</title>
+  <link rel="stylesheet" href="styles/style.css">
+  
+</head>
+<body>
+  <div class="container">
+    <div class="captcha" id="anycode">
+      <div class="something">
+        <div class="symbol" id="symbol1"></div>
+        <div class="symbol" id="symbol2"></div>
+        <div class="symbol" id="symbol3"></div>
+        <div class="symbol" id="symbol4"></div>
+        <div class="symbol" id="symbol5"></div>
+      </div>
+			<div class="rewrite" id="update" onclick="newSymbols();"><p>RESET</p>
+			</div>
+		</div>
+    <div class="captcha answer">
+      <input type="text" class="yourcode" id="codearea" placeholder="Click and write your code here" value=""/>
+      <input type="button" class="btn" id="btn" value="Submit"  />
+    </div> 
+		<footer>Made by Krzych 2018</footer>
+  </div>
+  <script src="scripts/index.js"></script>
+</body>
+</html>
