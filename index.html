@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My New Pen!</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Captcha system">
+  <meta name="author" content="Krzysztof Sobota">
+  <title>Captcha</title>
   <link rel="stylesheet" href="styles/style.css">
-  
-</head>
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:200,400" rel="stylesheet">
+<head>
 <body>
   <div class="container">
-    <div class="captcha" id="anycode">
-      <div class="something">
-        <div class="symbol" id="symbol1"></div>
-        <div class="symbol" id="symbol2"></div>
-        <div class="symbol" id="symbol3"></div>
-        <div class="symbol" id="symbol4"></div>
-        <div class="symbol" id="symbol5"></div>
-      </div>
-			<div class="rewrite" id="update" onclick="newSymbols();"><p>RESET</p>
-			</div>
-		</div>
-    <div class="captcha answer">
-      <input type="text" class="yourcode" id="codearea" placeholder="Click and write your code here" value=""/>
-      <input type="button" class="btn" id="btn" value="Submit"  />
-    </div> 
-		<footer>Made by Krzych 2018</footer>
+   <header class="test_name">
+      <a href="">
+        <h1><img src="" height="60" alt="captcha  symbol"><span class="test">Captcha</span>
+        </h1>
+      </a>
+    </header>
+    <article>
+      <h2>Client-side captcha</h2>
+      <p>My another idea is case-sensitive captcha and you have probably seen this many times before. So what special is inside it?</p>
+      <p>Go on and try captcha in a few difficulty levels!</p>
+      <main>
+        <section>
+          <div class="levels" id="optionsbox">
+            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" alt="easy level">
+            <input type="image" class="star" id="star2" src="/Symbol_Star.png" alt="normal level">
+            <input type="image" class="star" id="star3" src="/Symbol_Star.png" alt="hard level">
+            <input type="image" class="star" id="star4" src="/Symbol_Star.png" alt="very hard level">
+            <input type="image" class="star" id="star5" src="/Symbol_Star.png" alt="impossible level">
+          </div>
+          <div class="level_block">
+            <span class="level_text">some text</span>
+          </div>
+        </section>
+        <section id="anycode">
+         <div class="captcha">
+           <div class="something">
+            <div class="symbol" id="symbol1"></div>
+            <div class="symbol" id="symbol2"></div>
+            <div class="symbol" id="symbol3"></div>
+            <div class="symbol" id="symbol4"></div>
+            <div class="symbol" id="symbol5"></div>
+           </div>
+           <div class="reset">
+             <img src="/2-arrows-button(color).svg" id="update" alt="reset button">
+           </div>
+         </div>
+        </section>
+        <section class="answer">
+          <form action="">
+            <input type="text" id="codearea" placeholder="Write your code here" value="">
+            <input type="submit" id="btn" value="Check">
+          </form>
+        </section>
+      </main>
+    </article>
+    <footer>
+      <span>Krzysztof Sobota 2019</span>
+    </footer>
   </div>
   <script src="scripts/index.js"></script>
 </body>
