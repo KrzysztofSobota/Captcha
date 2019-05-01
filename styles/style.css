@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: hsl(45, 10%, 85%);
+  background-color: hsl(45, 15%, 92%);
 }
 
 * {
@@ -27,6 +27,7 @@ a {
 }
 
 p {
+  width: 100%;
   text-align: justify;
   text-indent: 0.75em;
   line-height: 1.5em;
@@ -39,7 +40,7 @@ p {
   height: 90px;
   flex-flow: row wrap;
   align-content: center;
-  background-color: ;
+  background-color: #f78080;
 }
 
 .test_name > a, a > h1 {
@@ -64,56 +65,71 @@ a > h1 {
   font-size: 2em;
 }
 
+main {
+  display: flex;
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 60px;
+}
+
 article {
   display: flex;
   flex-flow: row wrap;
 }
 
-main {
+section {
   display: flex;
   width: 100%;
   flex-flow: row wrap;
   justify-content: center;
-  padding: 0 10px;
-  margin-bottom: 60px;
+  margin: 15px 0;
 }
 
-section {
+table {
+  margin: 10px auto;
+  border-collapse: collapse;
+  width: 400px;
+}
+
+th, td {
+  text-align: left;
+  padding: 3px 8px;
+}
+
+th {
+/*  background-color: white;*/
+  border-bottom: 1px solid black;
+}
+
+th:first-of-type, td:first-of-type {
+  border-right: 1px solid black
+}
+
+tr:nth-child(even) {background-color: hsl(0, 0%, 99%);}
+
+.stars_level, .captcha, .answer {
   display: flex;
-  width: 100%;
-  height: 120px;
-  flex-flow: row wrap;
+  width: 500px;
   margin: 10px 0;
 }
 
-.levels, .captcha, .answer {
+.stars_level, .captcha {
+  justify-content: center;
+}
+
+.answer * {
   display: flex;
-  width: 500px;
-  height: 100px;
-}
-
-.captcha {  
-  background-color: hsl(0, 15%, 85%);
-  border: 1px solid black;
-}
-
-.answer {
-  border: 1px solid black;
-	
+  height: 50px;
+  font-size: 24px;
 }
 
 .yellow {
   background: url('Symbol_Star(color).png') no-repeat center;
 }
 
-.stars_block {
-  width: 400px;
-  height: 100%;
-}
-
 .level_block {
   display: flex;
-  width: 25%;
+  width: 30%;
   height: 100%;
   border: 1px solid black;
   justify-content: center;
@@ -125,51 +141,54 @@ section {
 }
 
 input[type='image'] {
-  width: 15%;
+  width: 14%;
   height: 100%;
 }
 
+.captcha {  
+  background-color: white;
+}
+
+.captcha, .answer {
+  border: 1px solid black;
+}
 
 .something {
-  position: relative;
-  width: 75%;
-  height: auto;
-	float: left;
+  width: 80%;
 }
 
 .symbol {
 	width: 15%;
 	height: inherit;
-	font: normal 60px Tahoma sans-serif;
+	font: normal 60px 'Arial';
 	background-color: transparent;
   border-color: transparent;
 	float: left;
 /*  filter: blur(3px);*/
 }
 
-.rewrite {
-	width: 100px;
+.reset {
+  width: 100px;
 	height: 100px;
-	background-color: #a6be81;
-	float: right;
+  border-width: 0;
+  background-color: #c9e5c3;
+  background-image: url('/2-arrows-button(color).svg');
+  background-size: cover;
 }
 
-img {
-  width: auto;
-  height: 100%;
+input[type='text'] {
+  flex: 0 0 400px;
 }
 
-
-input[type=submit] {
-  width: 25%;
-  height: 2em;
-  float: left;
+input[type='submit'] {
+  flex-basis: auto;
+  padding: 0 16px;
 }
 
 footer {
   position: fixed;
   width: 100%;
-  height: 2.25em;  
+  height: 50px;  
   bottom: 0;
   left: 0;
   font-size: 1.3em;
@@ -191,10 +210,54 @@ footer > span {
   h3 { font-size: 1em; }
     
   main {
-    padding: 0 8px;
+    padding: 0 10px;
+  }
+  
+  table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    width: 90%;
   }
   
   .test_name {
-    height: 100px;
+    height: 70px;
+  }
+  
+  .stars_level, .captcha, .answer {
+    width: 320px;
+    margin: 5px 0;
+  }
+
+  .stars_level, .captcha {
+    justify-content: center;
+  }
+
+  .answer * {
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .symbol {
+    width: 16%;
+    font: normal 54px 'Arial';
+  /*  filter: blur(3px);*/
+  }
+
+  .reset {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .answer {
+    flex: 1;
+  }
+
+  input[type='text'] {
+    flex: 0 0 auto;
+  }
+
+  input[type='submit'] {
+    flex-basis: 80px;
+    
   }
 }

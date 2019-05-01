@@ -18,24 +18,54 @@
         </h1>
       </a>
     </header>
-    <article>
-      <h2>Client-side captcha</h2>
-      <p>My another idea is case-sensitive captcha and you have probably seen this many times before. So what special is inside it?</p>
-      <p>Go on and try captcha in a few difficulty levels!</p>
-      <main>
+    <main>
+      <article>
+        <h2>Client-side captcha</h2>
+        <p>My another idea is case-sensitive captcha and you have probably seen this many times before. So what special you can find here?</p>
+        <p>In the table below I put description of 5 difficulty levels of this captcha and I believe that you can find something perfect just for you. Not too easy and not too hard.</p>
+        <table>
+          <tr>
+            <th>Level</th>
+            <th>Extra properties on the screen</th>
+          </tr>
+          <tr>
+            <td>Easy</td>
+            <td>none</td>
+          </tr>
+          <tr>
+            <td>Normal</td>
+            <td>+ ribbons</td>
+          </tr>
+          <tr>
+            <td>Hard</td>
+            <td>+ gradient</td>
+          </tr>
+          <tr>
+            <td>Very hard</td>
+            <td>+ blur</td>
+          </tr>
+          <tr>
+            <td>Impossible</td>
+            <td>+ upside down</td>
+          </tr>
+        </table>
+        <p>So go on and try captcha in a one of your favourite levels!</p>
         <section>
-          <div class="levels" id="optionsbox">
-            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" alt="easy level">
-            <input type="image" class="star" id="star2" src="/Symbol_Star.png" alt="normal level">
-            <input type="image" class="star" id="star3" src="/Symbol_Star.png" alt="hard level">
-            <input type="image" class="star" id="star4" src="/Symbol_Star.png" alt="very hard level">
-            <input type="image" class="star" id="star5" src="/Symbol_Star.png" alt="impossible level">
-          </div>
-          <div class="level_block">
-            <span class="level_text">some text</span>
+         <h3>Before the code will be displayed...</h3>
+         <p>You can choose any level of the captcha. On the right side of the stars you can see short text message - descriptions of these message were listed at the beginning of the page.</p>
+          <div class="stars_level" id="optionsbox">
+            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="70" alt="easy level">
+            <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="70" alt="normal level">
+            <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="70" alt="hard level">
+            <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="70" alt="very hard level">
+            <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="70" alt="impossible level">
+            <div class="level_block">
+              <span class="level_text">some text</span>
+            </div>
           </div>
         </section>
         <section id="anycode">
+          <h3>Captcha code to put the answer</h3>
          <div class="captcha">
            <div class="something">
             <div class="symbol" id="symbol1"></div>
@@ -44,19 +74,22 @@
             <div class="symbol" id="symbol4"></div>
             <div class="symbol" id="symbol5"></div>
            </div>
-           <div class="reset">
-             <img src="/2-arrows-button(color).svg" id="update" alt="reset button">
-           </div>
+           <input type="button" class="reset" id="update" alt="reset button">
          </div>
         </section>
-        <section class="answer">
-          <form action="">
-            <input type="text" id="codearea" placeholder="Write your code here" value="">
-            <input type="submit" id="btn" value="Check">
-          </form>
+        <section>
+         <h3>Final part of the game - code answer</h3>
+          <p>The right answer is the 5-symbol mix of digits and letters. Entering good code will be the end of mistery, but if the code is wrong borders of the input area will be display in red color.</p>
+          
+          <div class="answer">
+            <form action="">
+              <input type="text" id="codearea" placeholder="Write your code here" value="">
+              <input type="submit" id="btn" value="Check code">
+            </form>
+          </div>
         </section>
-      </main>
-    </article>
+      </article>
+    </main>
     <footer>
       <span>Krzysztof Sobota 2019</span>
     </footer>
