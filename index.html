@@ -12,9 +12,11 @@
 <head>
 <body>
   <div class="container">
-   <header class="test_name">
+    <header class="game_name">
       <a href="">
-        <h1><img src="" height="60" alt="captcha  symbol"><span class="test">Captcha</span>
+        <h1>
+          <img src="/captcha(small).svg" height="60" alt="captcha symbol">
+          <span class="test">Captcha</span>
         </h1>
       </a>
     </header>
@@ -23,6 +25,7 @@
         <h2>Client-side captcha</h2>
         <p>My another idea is case-sensitive captcha and you have probably seen this many times before. So what special you can find here?</p>
         <p>In the table below I put description of 5 difficulty levels of this captcha and I believe that you can find something perfect just for you. Not too easy and not too hard.</p>
+        <p>So go on and try captcha in a one of your favourite levels!</p>
         <table>
           <tr>
             <th>Level</th>
@@ -49,7 +52,6 @@
             <td>+ upside down</td>
           </tr>
         </table>
-        <p>So go on and try captcha in a one of your favourite levels!</p>
         <section>
          <h3>Before the code will be displayed...</h3>
          <p>You can choose any level of the captcha. On the right side of the stars you can see short text message - descriptions of these message were listed at the beginning of the page.</p>
@@ -66,21 +68,20 @@
         </section>
         <section id="anycode">
           <h3>Captcha code to put the answer</h3>
-         <div class="captcha">
-           <div class="something">
-            <div class="symbol" id="symbol1"></div>
-            <div class="symbol" id="symbol2"></div>
-            <div class="symbol" id="symbol3"></div>
-            <div class="symbol" id="symbol4"></div>
-            <div class="symbol" id="symbol5"></div>
+          <div class="captcha">
+            <div class="something">
+             <div class="symbol" id="symbol1"></div>
+             <div class="symbol" id="symbol2"></div>
+             <div class="symbol" id="symbol3"></div>
+             <div class="symbol" id="symbol4"></div>
+             <div class="symbol" id="symbol5"></div>
+            </div>
+            <input type="button" class="reset" id="update" value="reset button">
            </div>
-           <input type="button" class="reset" id="update" value="reset button">
-         </div>
         </section>
         <section>
-         <h3>Final part of the game - code answer</h3>
+          <h3>Final part of the game - code answer</h3>
           <p>The right answer is the 5-symbol mix of digits and letters. Entering good code will be the end of mistery, but if the code is wrong borders of the input area will be display in red color.</p>
-          
           <div class="answer">
             <form action="">
               <label for="codearea">Input captcha code:</label>
@@ -95,6 +96,6 @@
       <span>Krzysztof Sobota 2019</span>
     </footer>
   </div>
-  <script src="scripts/index.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>

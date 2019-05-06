@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="40" version="1.1" viewBox="-0.244 -0.228 120 40" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<rect x="-.055024" y="-.039024" width="79.622" height="39.622" ry="0" fill="#97eba2" stroke="#000" stroke-miterlimit="1" stroke-width=".37795" style="paint-order:stroke markers fill"/>
+<text transform="rotate(6)" x="9.2958603" y="27.395105" fill="#000000" font-family="Arial" font-size="21.73px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="9.2958603" y="27.395105" fill="#000000">4</tspan></text>
+<text transform="rotate(-5)" x="38.097294" y="29.190329" fill="#be2264" font-family="Arial" font-size="21.73px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="38.097294" y="29.190329" fill="#be2264">2</tspan></text>
+<text transform="rotate(-6)" x="52.797951" y="28.55331" fill="#3d13bb" font-family="Arial" font-size="21.73px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="52.797951" y="28.55331" fill="#3d13bb">9</tspan></text>
+<text transform="rotate(3)" x="24.036379" y="23.855217" fill="#5b4c12" font-family="Arial" font-size="21.73px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="24.036379" y="23.855217" fill="#5b4c12">G</tspan></text>
+<text transform="rotate(6)" x="71.995224" y="18.410343" fill="#df1b1b" font-family="Arial" font-size="21.73px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="71.995224" y="18.410343" fill="#df1b1b">U</tspan></text>
+<rect x="79.845" y="-.039024" width="39.622" height="39.622" fill="#695030" stroke="#6f8b37" stroke-miterlimit="1" stroke-width=".37795" style="paint-order:stroke markers fill"/>
+<text x="99.544876" y="25.081211" fill="#cae41e" font-family="Arial" font-size="17.868px" letter-spacing="0px" text-align="center" text-anchor="middle" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="99.544876" y="25.081211" fill="#cae41e">click</tspan></text>
+</svg>
