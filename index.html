@@ -55,39 +55,39 @@
         <section>
          <h3>Before the code will be displayed...</h3>
          <p>You can choose any level of the captcha. On the right side of the stars you can see short text message - descriptions of these message were listed at the beginning of the page.</p>
-          <div class="stars_level" id="optionsbox">
-            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="70" alt="easy level">
-            <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="70" alt="normal level">
-            <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="70" alt="hard level">
-            <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="70" alt="very hard level">
-            <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="70" alt="impossible level">
+         <div class="stars_level" id="optionsbox">
+            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="60" alt="easy level">
+            <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="60" alt="normal level">
+            <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="60" alt="hard level">
+            <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="60" alt="very hard level">
+            <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="60" alt="impossible level">
             <div class="level_block">
-              <span class="level_text">some text</span>
+              <span id="level_text"></span>
             </div>
           </div>
         </section>
-        <section id="anycode">
+        <section>
           <h3>Captcha code to put the answer</h3>
           <div class="captcha">
-            <div class="something">
+            <div class="final_code">
              <div class="symbol" id="symbol1"></div>
              <div class="symbol" id="symbol2"></div>
              <div class="symbol" id="symbol3"></div>
              <div class="symbol" id="symbol4"></div>
              <div class="symbol" id="symbol5"></div>
             </div>
-            <input type="button" class="reset" id="update" value="reset button">
-           </div>
+            <input type="button" class="reset" id="update">
+          </div>
         </section>
         <section>
           <h3>Final part of the game - code answer</h3>
           <p>The right answer is the 5-symbol mix of digits and letters. Entering good code will be the end of mistery, but if the code is wrong borders of the input area will be display in red color.</p>
+          <label for="codearea">
+            <span>Input captcha code into the form and click the button:</span>
+          </label>
           <div class="answer">
-            <form action="">
-              <label for="codearea">Input captcha code:</label>
-              <input type="text" id="codearea" name="codearea" placeholder="Write your code here">
-              <input type="submit" id="btn" value="Check code">
-            </form>
+            <input type="text" id="codearea" name="codearea" placeholder="Write your code here">
+            <input type="submit" id="btn" value="Check code">
           </div>
         </section>
       </article>

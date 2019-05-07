@@ -1,31 +1,35 @@
+'use strict'
+
 window.addEventListener('DOMContentLoaded', changeStars, false);
 window.addEventListener('DOMContentLoaded', newSymbols, false);
 
+/* Change level of the game depending on user choice */
+
 function changeStars() {
-  let index = 0; //default level, first star is yellow
-  let textBox = document.getElementsByClassName('descr');
-  let star = document.getElementsByClassName('levels')[index];
+  let index = 0; //default level, first star is always yellow
+  let captchaLvl = document.querySelector('#level_text');
+  let star = document.querySelectorAll('.stars_level')[index];
     
-  let currentElement = null;
     
-  var starSelected = false;
-  var starHovered = false;  
+  let starSelected = false;
+  let starHovered = false;  
   
   /* Get index of element from NodeList */
-  function starIndex() {    
-    var child = document.getElementById(`${currentElement}`);
-    var parent = child.parentNode;
-    var index = Array.prototype.indexOf.call(parent.children, child);
+  function starIndex(currentElement) {    
+    let child = document.querySelector(`${currentElement}`);
+    let parent = child.parentNode;
+    let index = Array.prototype.indexOf.call(parent.children, child);
     
     return index;
   }
   
   star.addEventListener('mouseover', function(e) {
-    currentElement = e.target.id;
+    let currentElement = e.target.id;
 //    alert(`${currentElement}`);
     starIndex(currentElement);
+    alert(`${index}`);
     if (currentElement != null) {
-      for(let i = 0; i < index; i++) {  document.getElementById(`star${i+1}`).src = '/Symbol_Star(color).png';
+      for (let i = 0; i < index; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
       }
     }
     starHovered = true;
@@ -34,7 +38,7 @@ function changeStars() {
 
   star.addEventListener('click', function(e) {
     currentElement = e.target.id;
-    let getStars = document.querySelectorAll('.levels > input[type=image]');
+    let getStars = document.querySelectorAll('.stars_level > input[type=image]');
     
     function classChange() {
       starIndex(currentElement);
@@ -58,7 +62,7 @@ function changeStars() {
     starIndex(currentElement);
       if (starSelected == false) {
         for(let i = 1; i < index; i++) {
-      document.getElementById(`star${i+1}`).src = '/Symbol_Star.png';
+      document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
         }
       }
    },
@@ -79,15 +83,15 @@ function changeStars() {
 
 /**/
 function newSymbols() {
-  let pos1 = document.getElementById('symbol1');
-	let pos2 = document.getElementById('symbol2');
-	let pos3 = document.getElementById('symbol3');
-	let pos4 = document.getElementById('symbol4');
-	let pos5 = document.getElementById('symbol5');
+  let pos1 = document.querySelector('#symbol1');
+	let pos2 = document.querySelector('#symbol2');
+	let pos3 = document.querySelector('#symbol3');
+	let pos4 = document.querySelector('#symbol4');
+	let pos5 = document.querySelector('#symbol5');
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
   let symbolString = [];
 	
-	for (let i = 0; i <= 4; i++) {
+	for (let i = 0; i < symbolsArray.length; i++) {
 		let highLow = Math.random();
     
 		// 50/50 chance for getting digit or letter
@@ -117,8 +121,8 @@ function newSymbols() {
 /**/
 function compareText(){
   let text = "";
-  let onesign = document.getElementsByClassName("symbol");
-  let inputText = document.getElementById("codearea").value;
+  let onesign = document.querySelectorAll('.symbol');
+  let inputText = document.querySelector('#codearea').value;
   
   for(let a = 0; a <= 4; a++) { 
     text += onesign[a].innerText;
@@ -132,5 +136,5 @@ function compareText(){
   }
 }
 
-document.getElementById('update').addEventListener('click', newSymbols, false);
-document.getElementById('btn').addEventListener('click', compareText, false);
+document.querySelector('#update').addEventListener('click', newSymbols, false);
+document.querySelector('#btn').addEventListener('click', compareText, false);
