@@ -10,7 +10,8 @@ html, body {
 }
 
 .container {
-  height: auto;
+  width: 920px;
+  margin: 0 auto;
 }
 
 main h1, main h2, main h3 { 
@@ -65,7 +66,7 @@ a > h1 {
   padding-left: 25px;
   margin-bottom: 8px;
   font-size: 75px;
-  color: hsl(55, 69%, 48%);
+  color: hsl(55, 71%, 50%);
 }
 
 main, article, section {
@@ -127,23 +128,24 @@ tr:nth-child(even) {
   background: url('Symbol_Star(color).png') no-repeat center;
 }
 
+input[type='image'] {
+  width: 60px;
+  height: auto;
+}
+
 .level_block {
   display: flex;
   width: 200px;
-  height: 100%;
+  margin-left: 10px;
   justify-content: center;
   align-items: center;
-  border: 2px dashed hsl(217, 86%, 50%);
-  background-color: hsl(212, 28%, 82%);
+  border: 1px solid hsl(217, 86%, 50%);
+  border-radius: 25px;
+  background-color: hsl(212, 29%, 80%);
 }
 
 .level_block > span {
   font-size: 18px;
-}
-
-input[type='image'] {
-  width: auto;
-  height: 100%;
 }
 
 .final_code {
