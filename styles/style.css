@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: hsl(45, 15%, 92%);
+  background-color: hsl(45, 15%, 42%);
 }
 
 * {
@@ -12,6 +12,7 @@ html, body {
 .container {
   width: 920px;
   margin: 0 auto;
+  background-color: hsl(45, 15%, 92%);
 }
 
 main h1, main h2, main h3 { 
@@ -109,7 +110,7 @@ tr:nth-child(even) {
   background-color: hsl(0, 4%, 84%);
 }
 
-.stars_level, .captcha, .answer {
+.stars, .captcha, .answer {
   display: flex;
   width: 500px;
   margin: 10px auto;
@@ -122,6 +123,12 @@ tr:nth-child(even) {
 
 .captcha {  
   background-color: white;
+}
+
+.stars_level {
+  display: flex;
+  width: 300px;
+  height: 100%;
 }
 
 .yellow {
@@ -201,6 +208,12 @@ footer > span {
   font-style: italic;
 }
 
+@media screen and (max-width: 920px) {
+  .container {
+    width: 100%;
+  }  
+}
+
 @media screen and (max-width: 400px) {
   body, html {
     font-size: 12px;
@@ -228,12 +241,12 @@ footer > span {
     margin: 10px auto;
   }
   
-  .stars_level, .captcha, .answer {
+  .stars, .captcha, .answer {
     width: 320px;
     margin: 8px 0;
   }
 
-  .stars_level, .captcha {
+  .stars, .captcha {
     justify-content: center;
   }
 
@@ -252,16 +265,35 @@ footer > span {
     height: 80px;
   }
   
-  input[type='image'] {
-    width: 40px;
+  .stars {
+    flex-flow: row wrap;
+  }
+  
+  .level_block, .stars_level {
+    height: 50px;
+    justify-content: center;
   }
   
   .level_block {
-    width: 120px;
+    width: 180px;
+    margin: 6px 0 0 0;
+  }
+  
+  input[type='image'] {
+    width: 50px;
+  }
+  
+  .level_block > span {    
+    font-size: 16px;
   }
   
   .answer {
     flex: 1;
+  }
+  
+  label > span {
+    margin: 5px 0 2px 0;
+    font-size: 14px;
   }
 
   input[type='text'] {
@@ -275,5 +307,9 @@ footer > span {
   
   footer {
     height: 50px;
+  }
+  
+  footer > span {
+    padding: 5px;
   }
 }

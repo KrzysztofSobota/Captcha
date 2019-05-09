@@ -24,13 +24,13 @@
       <article>
         <h2>Client-side captcha</h2>
         <section>
-         <h3>Before the code will be displayed...</h3>
+          <h3>Before the code will be displayed...</h3>
          <p>My another idea is game based on common used in the Internet security - "captcha". My game is case-sensitive version, but what else is so special here?</p>
          <p>You can choose from any of 5 difficulty levels of this "captcha". Name of recently selected level (short text message) are showed inside the box in the right side of the stars. Description what "surprise" is included in every level you can find in the table below.</p>
          <p>You can start game instantly in "easy" (default) level or click any of the non-yellow star. If you made a choice and decide to change the level, refresh the page (F5) or click yellow reset button near  the captcha code. This will change the game level and the code.</p>
          <p>I believe that you can find something perfect just for you. Not too easy and not too hard.</p>
          <p>So go on and try captcha in a one of your favourite levels!</p>
-         <table>
+          <table>
           <tr>
             <th>Level</th>
             <th>Extra properties on the screen</th>
@@ -56,12 +56,14 @@
             <td>+ upside down</td>
           </tr>
         </table>
-         <div class="stars_level" id="optionsbox">
-            <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="60" alt="easy level">
-            <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="60" alt="normal level">
-            <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="60" alt="hard level">
-            <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="60" alt="very hard level">
-            <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="60" alt="impossible level">
+          <div class="stars">
+            <div class="stars_level">
+              <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="60" alt="easy level">
+              <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="60" alt="normal level">
+              <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="60" alt="hard level">
+              <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="60" alt="very hard level">
+              <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="60" alt="impossible level">
+            </div>
             <div class="level_block">
               <span id="level_text">Easy level</span>
             </div>
