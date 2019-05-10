@@ -1,7 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: hsl(45, 15%, 42%);
+  background-color: hsl(45, 14%, 51%);
+  background: linear-gradient(90deg, hsl(45, 14%, 51%) 0%, #182848 50%, hsl(45, 14%, 51%) 100%);
 }
 
 * {
@@ -11,7 +12,7 @@ html, body {
 
 .container {
   width: 920px;
-  margin: 0 auto;
+  margin: 0 auto -20px auto;
   background-color: hsl(45, 15%, 92%);
 }
 
@@ -123,6 +124,7 @@ tr:nth-child(even) {
 
 .captcha {  
   background-color: white;
+/*  background: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); */
 }
 
 .stars_level {
