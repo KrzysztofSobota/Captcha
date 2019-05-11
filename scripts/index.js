@@ -6,30 +6,30 @@ window.addEventListener('DOMContentLoaded', newSymbols, false);
 /* Change level of the game depending on user choice */
 
 function changeStars() {
-  let index = 0; //default level, first star is always yellow
-  let captchaLvl = document.querySelector('#level_text');
-  let star = document.querySelectorAll('.stars_level')[index];
+  let defaultIndex = 0; //default level, first star is always yellow
+  let captchaLvl = document.querySelector('#optionsbox');
+  let star = document.querySelectorAll('.stars_level')[defaultIndex];
     
-    
+  let currentElement = undefined;
   let starSelected = false;
   let starHovered = false;  
   
   /* Get index of element from NodeList */
-  function starIndex(currentElement) {    
-    let child = document.querySelector(`${currentElement}`);
+  function findIndex() {    
+    let child = document.getElementById(`${currentElement}`);
     let parent = child.parentNode;
-    let index = Array.prototype.indexOf.call(parent.children, child);
+    let starNumber = Array.prototype.indexOf.call(parent.children, child);
     
-    return index;
+    return starNumber;
   }
   
+  
   star.addEventListener('mouseover', function(e) {
-    let currentElement = e.target.id;
-//    alert(`${currentElement}`);
-    starIndex(currentElement);
-    alert(`${index}`);
+    currentElement = e.target.id;
+    let starIndex = findIndex(currentElement);
+    
     if (currentElement != null) {
-      for (let i = 0; i < index; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
+      for (let i = 1; i < starIndex; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
       }
     }
     starHovered = true;
@@ -38,30 +38,26 @@ function changeStars() {
 
   star.addEventListener('click', function(e) {
     currentElement = e.target.id;
+    let starIndex = findIndex(currentElement);
     let getStars = document.querySelectorAll('.stars_level > input[type=image]');
     
     function classChange() {
       starIndex(currentElement);
-      let getClass = getStars[index].className;
-      getClass = getStars[index].classList.add('yellow'); 
-      alert(index);
-      
+      let getClass = getStars[starIndex].className;
+      getClass = getStars[starIndex].classList.add('yellow'); 
+            
       return getClass;
     }
         
-    let newClasses = classChange(index, getStars);   
-    
-    
-    
+    let newClasses = classChange(index, getStars);
   }, {once: true});
-
   
-      
+    
   star.addEventListener('mouseout', function(e) {
     currentElement = e.target.id;
-    starIndex(currentElement);
+    let starIndex = findIndex(currentElement);
       if (starSelected == false) {
-        for(let i = 1; i < index; i++) {
+        for(let i = 1; i < starIndex; i++) {
       document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
         }
       }
@@ -71,7 +67,7 @@ function changeStars() {
   
   star.addEventListener('mousemove', function(e) {
     currentElement = e.target.id;
-    starIndex(currentElement);
+    let starIndex = findIndex(currentElement);
 //    alert(`${currentElement} , ${elem}`);
     if (starSelected == true) {
       star.onmousemove = false;
@@ -112,7 +108,20 @@ function newSymbols() {
 		let x = Math.floor(Math.random() * 10 + 15);
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
-		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;    
+		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
+
+    // Normal level
+  document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
+    
+    // Hard level
+    symbolsArray[i].style.filter = `blur(5px)`;
+    
+    // Very hard level
+    symbolsArray[i].style.transform = `rotateZ(180deg)`;
+    
+    /* Impossible level - 'p' is a perspective value */
+    let p = Math.floor(Math.random() * 100 + 100);
+    document.querySelector('.captcha').style.perspective = `${p}px`;    document.querySelector('.final_code').style.transformStyle = `preserve-3d`;    document.querySelector('.final_code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
 	}
   
   return symbolsArray;	
