@@ -124,7 +124,7 @@ tr:nth-child(even) {
 
 .captcha {  
   background-color: white;
-/*  background: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); */
+/*  perspective: 100px;*/
 }
 
 .stars_level {
@@ -157,8 +157,18 @@ input[type='image'] {
   font-size: 18px;
 }
 
-.final_code {
+.noise {
   width: 80%;
+/*  background-image: url(/noise.svg);*/
+}
+
+.final_code {
+  width: auto;
+  height: 100%;
+/*
+  transform-style: preserve-3d;
+  transform: rotateX(30deg) rotateY(-15deg);
+*/
 }
 
 .symbol {
@@ -166,8 +176,8 @@ input[type='image'] {
 	font: normal 60px 'Arial';
 	background-color: transparent;
   border-color: transparent;
+/*  filter: blur(5px);*/
 	float: left;
-/*  filter: blur(3px);*/
 }
 
 .reset {
@@ -257,6 +267,10 @@ footer > span {
     font-size: 18px;
   }
   
+  .final_code {
+    flex: 1 0 240px;
+  }
+  
   .symbol {
     font-size: 54px;
   /*  filter: blur(3px);*/
@@ -265,6 +279,7 @@ footer > span {
   .reset {
     width: 80px;
     height: 80px;
+    padding: 0;
   }
   
   .stars {
@@ -275,10 +290,11 @@ footer > span {
     height: 50px;
     justify-content: center;
   }
-  
+    
   .level_block {
     width: 180px;
-    margin: 6px 0 0 0;
+    order: -1;
+    margin: 10px 0;
   }
   
   input[type='image'] {
