@@ -127,7 +127,7 @@ tr:nth-child(even) {
 /*  perspective: 100px;*/
 }
 
-.stars_level {
+.game-level {
   display: flex;
   width: 300px;
   height: 100%;
@@ -286,7 +286,7 @@ footer > span {
     flex-flow: row wrap;
   }
   
-  .level_block, .stars_level {
+  .level_block, .game-level {
     height: 50px;
     justify-content: center;
   }

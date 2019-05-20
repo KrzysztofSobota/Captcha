@@ -7,12 +7,9 @@ window.addEventListener('DOMContentLoaded', newSymbols, false);
 
 function changeStars() {
   let defaultIndex = 0; //default level, first star is always yellow
-  let captchaLvl = document.querySelector('#optionsbox');
-  let star = document.querySelectorAll('.stars_level')[defaultIndex];
+  let star = document.querySelectorAll('.game-level')[defaultIndex];
     
   let currentElement = undefined;
-  let starSelected = false;
-  let starHovered = false;  
   
   /* Get index of element from NodeList */
   function findIndex() {    
@@ -23,61 +20,51 @@ function changeStars() {
     return starNumber;
   }
   
+  let levelText = document.querySelector('#level-text');
   
   star.addEventListener('mouseover', function(e) {
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
     
     if (currentElement != null) {
-      for (let i = 1; i < starIndex; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
+      for (let i = 0; i <= starIndex; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
       }
+      
+      levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
     }
-    starHovered = true;
   });
-  
-
-  star.addEventListener('click', function(e) {
-    currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);
-    let getStars = document.querySelectorAll('.stars_level > input[type=image]');
-    
-    function classChange() {
-      starIndex(currentElement);
-      let getClass = getStars[starIndex].className;
-      getClass = getStars[starIndex].classList.add('yellow'); 
-            
-      return getClass;
-    }
-        
-    let newClasses = classChange(index, getStars);
-  }, {once: true});
   
     
   star.addEventListener('mouseout', function(e) {
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
       if (starSelected == false) {
-        for(let i = 1; i < starIndex; i++) {
+        for(let i = 1; i <= starIndex; i++) {
       document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
         }
+        
+        levelText.textContent =  document.querySelector('#star1').alt;
       }
-   },
-//   {once: true}
+   }
   );
   
-  star.addEventListener('mousemove', function(e) {
+  
+  star.addEventListener('click', function(e) {
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
-//    alert(`${currentElement} , ${elem}`);
-    if (starSelected == true) {
-      star.onmousemove = false;
-    }
-   },
-   {once: true}
-  );
+    let getStars = document.querySelectorAll('.game-level > input[type="image"]');
+    
+    if (currentElement != null) {
+      for (let i = 0; i <= starIndex; i++) {
+      getStars[starIndex].classList.add('yellow');
+      }
+    }    
+
+  }, {once: true});
+  
 }
 
-/**/
+/* Creating new combination of captcha symbols on the screen */
 function newSymbols() {
   let pos1 = document.querySelector('#symbol1');
 	let pos2 = document.querySelector('#symbol2');
@@ -111,6 +98,7 @@ function newSymbols() {
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
 
     // Normal level
+    
   document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
     
     // Hard level
@@ -127,7 +115,7 @@ function newSymbols() {
   return symbolsArray;	
 }
 
-/**/
+/* Checking if input text is exactly the same as generated captcha code (game is case-sensitive!) */
 function compareText(){
   let text = "";
   let onesign = document.querySelectorAll('.symbol');
