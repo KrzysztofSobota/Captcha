@@ -134,7 +134,7 @@ tr:nth-child(even) {
 }
 
 .yellow {
-  background: url('Symbol_Star(color).png') no-repeat center;
+  background: url('/Symbol_Star(color).png') no-repeat center;
 }
 
 input[type='image'] {

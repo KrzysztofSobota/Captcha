@@ -38,8 +38,8 @@ function changeStars() {
   star.addEventListener('mouseout', function(e) {
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
-      if (starSelected == false) {
-        for(let i = 1; i <= starIndex; i++) {
+      if (currentElement != null) {
+        for (let i = 1; i <= starIndex; i++) {
       document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
         }
         
@@ -52,14 +52,12 @@ function changeStars() {
   star.addEventListener('click', function(e) {
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
-    let getStars = document.querySelectorAll('.game-level > input[type="image"]');
+    let getStars = document.querySelectorAll('.star');
     
-    if (currentElement != null) {
-      for (let i = 0; i <= starIndex; i++) {
-      getStars[starIndex].classList.add('yellow');
-      }
-    }    
-
+    for (let i = 1; i <= starIndex; i++) {
+      getStars[i].classList.add('yellow');
+    }
+    levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
   }, {once: true});
   
 }
