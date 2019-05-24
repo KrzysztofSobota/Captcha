@@ -20,9 +20,19 @@ function changeStars() {
     return starNumber;
   }
   
+  let getStars = document.querySelectorAll('.star');
   let levelText = document.querySelector('#level-text');
   
+  /*function chooseStar(e) {
+    currentElement = e.target.id;
+    let starIndex = findIndex(currentElement);
+    return starIndex;
+  }*/
+  
+  
   star.addEventListener('mouseover', function(e) {
+    
+    
     currentElement = e.target.id;
     let starIndex = findIndex(currentElement);
     
@@ -40,30 +50,27 @@ function changeStars() {
     let starIndex = findIndex(currentElement);
       if (currentElement != null) {
         for (let i = 1; i <= starIndex; i++) {
-      document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
-        }
-        
-        levelText.textContent =  document.querySelector('#star1').alt;
+        document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
+        }        
+        levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
       }
-   }
-  );
+   });
   
   
   star.addEventListener('click', function(e) {
     currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);
-    let getStars = document.querySelectorAll('.star');
+    let starIndex = findIndex(currentElement);    
     
     for (let i = 1; i <= starIndex; i++) {
       getStars[i].classList.add('yellow');
     }
     levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
   }, {once: true});
-  
+    
 }
 
 /* Creating new combination of captcha symbols on the screen */
-function newSymbols() {
+function newSymbols(level) {
   let pos1 = document.querySelector('#symbol1');
 	let pos2 = document.querySelector('#symbol2');
 	let pos3 = document.querySelector('#symbol3');
@@ -95,6 +102,7 @@ function newSymbols() {
 		let z = Math.floor(Math.random() * 20 - 10);
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
 
+    
     // Normal level
     
   document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
