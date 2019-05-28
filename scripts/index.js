@@ -10,7 +10,7 @@ function changeStars() {
   let star = document.querySelectorAll('.game-level')[defaultIndex];
     
   let currentElement = undefined;
-  
+	
   /* Get index of element from NodeList */
   function findIndex() {    
     let child = document.getElementById(`${currentElement}`);
@@ -22,55 +22,52 @@ function changeStars() {
   
   let getStars = document.querySelectorAll('.star');
   let levelText = document.querySelector('#level-text');
-  
-  /*function chooseStar(e) {
+  	
+	let eventType = function(e) {
+		return e.type;
+	};
+	
+  function starEvents(e) {
     currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);
-    return starIndex;
-  }*/
-  
-  
+		let starIndex = findIndex(currentElement);    
+    
+    levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
+		
+		return starIndex;
+  }
+		
   star.addEventListener('mouseover', function(e) {
-    
-    
-    currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);
-    
-    if (currentElement != null) {
-      for (let i = 0; i <= starIndex; i++) {  document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
-      }
-      
-      levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
-    }
+		let starNumber = starEvents(e);
+			 for (let i = 0; i <= starNumber; i++) {    document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
+			 }			
   });
   
-    
   star.addEventListener('mouseout', function(e) {
-    currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);
-      if (currentElement != null) {
-        for (let i = 1; i <= starIndex; i++) {
+    let starNumber = starEvents(e);
+       for (let i = 1; i <= starNumber; i++) {
         document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
-        }        
-        levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
-      }
+       }
+     		
+			if (eventType = 'click') {
+				
+			}
    });
-  
-  
+  	
   star.addEventListener('click', function(e) {
-    currentElement = e.target.id;
-    let starIndex = findIndex(currentElement);    
-    
-    for (let i = 1; i <= starIndex; i++) {
-      getStars[i].classList.add('yellow');
-    }
-    levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
-  }, {once: true});
-    
+		let starNumber = starEvents(e);
+			 for (let i = 1; i <= starNumber; i++) {
+				 getStars[i].classList.add('yellow');
+			 }
+	}, {once: true});
+	
+	return starEvents('click');
 }
 
+
+
 /* Creating new combination of captcha symbols on the screen */
-function newSymbols(level) {
+
+function newSymbols() {
   let pos1 = document.querySelector('#symbol1');
 	let pos2 = document.querySelector('#symbol2');
 	let pos3 = document.querySelector('#symbol3');
@@ -101,22 +98,26 @@ function newSymbols(level) {
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
-
-    
-    // Normal level
-    
-  document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
-    
-    // Hard level
-    symbolsArray[i].style.filter = `blur(5px)`;
-    
-    // Very hard level
-    symbolsArray[i].style.transform = `rotateZ(180deg)`;
-    
-    /* Impossible level - 'p' is a perspective value */
-    let p = Math.floor(Math.random() * 100 + 100);
-    document.querySelector('.captcha').style.perspective = `${p}px`;    document.querySelector('.final_code').style.transformStyle = `preserve-3d`;    document.querySelector('.final_code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
 	}
+    /*switch(a) {
+			case 1:
+			// Normal level
+				document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
+				break;
+			case 2:
+			// Hard level
+				symbolsArray[i].style.filter = `blur(5px)`;
+				break;
+			case 3:
+			// Very hard level
+				symbolsArray[i].style.transform = `rotateZ(180deg)`;
+				break;
+			case 4:
+			// Impossible level - 'p' is a perspective value
+				let p = Math.floor(Math.random() * 100 + 100);
+				document.querySelector('.captcha').style.perspective = `${p}px`;    document.querySelector('.final_code').style.transformStyle = `preserve-3d`;    document.querySelector('.final_code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
+				break;
+		}*/
   
   return symbolsArray;	
 }
@@ -125,17 +126,19 @@ function newSymbols(level) {
 function compareText(){
   let text = "";
   let onesign = document.querySelectorAll('.symbol');
-  let inputText = document.querySelector('#codearea').value;
+	let answerArea = document.querySelector('#codearea');
+  let inputText = answerArea.value;
   
   for(let a = 0; a <= 4; a++) { 
     text += onesign[a].innerText;
   }
     
   if(text == inputText) {
-    alert("Okay");
+    alert('Great job !!!');
   }
   else {
-    alert("wrong");
+		answerArea.style.border = '4px solid #ff0000';
+		answerArea.style.backgroundColor = 'rgba(219, 63, 63, 0.92)';
   }
 }
 
