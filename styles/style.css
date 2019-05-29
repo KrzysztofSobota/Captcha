@@ -1,8 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: hsl(45, 14%, 51%);
-  background: linear-gradient(90deg, hsl(45, 14%, 51%) 0%, #182848 50%, hsl(45, 14%, 51%) 100%);
+  background: linear-gradient(90deg, hsl(45, 14%, 51%) 0%, hsl(220, 50%, 19%) 50%, hsl(45, 14%, 51%) 100%);
 }
 
 * {
@@ -16,9 +15,10 @@ html, body {
   background-color: hsl(45, 15%, 92%);
 }
 
-main h1, main h2, main h3 { 
+h2, h3 { 
   width: 100%;
   margin: 5px 0;
+	padding-left: 10px;
   color: hsl(214, 75%, 21%);
 }
 
@@ -32,20 +32,19 @@ a {
 }
 
 p {
-  width: 100%;
   text-align: justify;
   text-indent: 1em;
   line-height: 1.5em;
   margin: 0.2em 0;
 }
 
-.game_name, .game_name > a, a > h1 {
+.main-header, .main-header > a, h1 {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.game_name {
+.main-header {
   width: 100%;
   height: 120px;
   flex-flow: row wrap;
@@ -53,17 +52,17 @@ p {
   background-color: hsl(214, 75%, 23%);
 }
 
-.game_name > a {
+.main-header > a {
   width: 100%;
   height: 100%;
 }
 
-a > h1 {
+h1 {
   height: auto;
   flex-flow: row nowrap;
 }
 
-.test {
+.gamename {
   justify-content: center;
   padding-left: 25px;
   margin-bottom: 8px;
@@ -78,12 +77,13 @@ main, article, section {
 }
 
 main {
-  padding: 5px 15px;
+  padding: 10px 15px;
   margin-bottom: 70px;
 }
 
 section {
   margin: 15px 0;
+	padding: 0 10px;
 }
 
 table {
@@ -111,20 +111,24 @@ tr:nth-child(even) {
   background-color: hsl(0, 4%, 84%);
 }
 
-.stars, .captcha, .answer {
-  display: flex;
-  width: 500px;
-  margin: 10px auto;
+.stars, .captcha, .codearea {
+	display: flex;
+	margin: 10px auto;
+  width: 500px;  
 }
 
-.answer > * {
+.answer {
+	display: block;
+	float: left;
+}
+
+.answer > input {
   height: 50px;
   font-size: 24px;
 }
 
 .captcha {  
   background-color: white;
-/*  perspective: 100px;*/
 }
 
 .game-level {
@@ -142,7 +146,7 @@ input[type='image'] {
   height: auto;
 }
 
-.level_block {
+.level-block {
   display: flex;
   width: 200px;
   margin-left: 10px;
@@ -153,22 +157,17 @@ input[type='image'] {
   background-color: hsl(212, 29%, 80%);
 }
 
-.level_block > span {
+.level-block > span {
   font-size: 18px;
 }
 
 .noise {
   width: 80%;
-/*  background-image: url(/noise.svg);*/
 }
 
-.final_code {
+.final-code {
   width: auto;
   height: 100%;
-/*
-  transform-style: preserve-3d;
-  transform: rotateX(30deg) rotateY(-15deg);
-*/
 }
 
 .symbol {
@@ -184,23 +183,28 @@ input[type='image'] {
   width: 100px;
 	height: 100px;
   border-width: 0;
-  background-image: url('/2-arrows-button(color).png');
+  background-image: url('/reset-button.svg');
   background-size: cover;
+	cursor: pointer;
+}
+
+.codearea {
+	height: auto;
 }
 
 label > span {
   display: inline-block;
   width: 100%;
   font-size: 18px;
-  margin: 15px 0 5px 10px;
+	padding: 10px 0;
 }
 
 input[type='text'] {
-  width: 350px;
+  max-width: 300px;
 }
 
 input[type='submit'] {
-  width: 150px;
+  width: auto;
 }
 
 footer {
@@ -220,109 +224,187 @@ footer > span {
   font-style: italic;
 }
 
-@media screen and (max-width: 920px) {
-  .container {
-    width: 100%;
-  }  
+@media screen and (min-width: 768px) and (max-width: 920px) {
+	
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (min-width: 480px) and (max-width: 768px) {
   body, html {
-    font-size: 12px;
+    font-size: 14px;
   }
-  
-  main {
-    margin-bottom: 60px;
+	
+	.container {
+    width: 100%;
   }
-  
+	
+  .main-header {
+    height: 100px;
+  }
+	
   h1 > img {
-    height: 40px;
+    height: 50px;
   }
   
-  .test {
-    font-size: 50px;
-    padding-left: 12px;
+  .gamename {
+    font-size: 60px;
+  }
+	
+  main {
+		padding: 5px 10px;
   }
   
-  .game_name {
-    height: 80px;
-  }
-  
-  table {
-    width: 95%;
-    margin: 10px auto;
-  }
-  
-  .stars, .captcha, .answer {
-    width: 320px;
-    margin: 8px 0;
+	article, section, h2 {
+		padding: 0;
+	}
+	
+	table {
+		margin: 5px 0;
+	}
+	
+  .captcha {
+  	width: 450px;
   }
 
-  .stars, .captcha {
+  .stars, .captcha, .level-block, .game-level {
+		margin: 5px 0;
     justify-content: center;
   }
 
-  .answer * {
-    height: 40px;
-    font-size: 18px;
-  }
-  
-  .final_code {
+  .final-code {
     flex: 1 0 240px;
-  }
-  
-  .symbol {
-    font-size: 54px;
-  /*  filter: blur(3px);*/
-  }
-
-  .reset {
-    width: 80px;
-    height: 80px;
-    padding: 0;
   }
   
   .stars {
     flex-flow: row wrap;
   }
   
-  .level_block, .game-level {
-    height: 50px;
-    justify-content: center;
+  .level-block, .game-level {
+    width: 300px;
+  }
+	
+	.game-level {
+    height: auto;
   }
     
-  .level_block {
-    width: 180px;
+  .level-block {
+    height: 50px;
     order: -1;
-    margin: 10px 0;
   }
   
   input[type='image'] {
-    width: 50px;
+    width: 60px;
+  }
+	
+  .reset {
+    width: 100px;
+    height: 100px;
+  }  
+  
+	.codearea {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+  body, html {
+    font-size: 12px;
+  }
+	
+  .container {
+    width: 100%;
   }
   
-  .level_block > span {    
-    font-size: 16px;
+  .main-header {
+    height: 80px;
   }
+	
+  h1 > img {
+    height: 40px;
+  }
+  
+  .gamename {
+    font-size: 50px;
+    padding-left: 8px;
+  }
+	
+  main {
+		padding: 5px 10px;
+    margin-bottom: 60px;
+  }
+  
+	article, section, h2 {
+		padding: 0;
+	}
+  
+	section, .stars, .captcha, .level-block, .game-level, table {		
+    margin: 5px 0;
+	}
+	
+	h3 {
+		padding-left: 5px;
+	}
+	
+  table {
+		font-size: 14px;
+  }
+  
+  .stars, .captcha, table {
+    width: 100%;
+		max-width: 400px;
+  }
+
+  .stars, .captcha, .level-block, .game-level {
+    justify-content: center;
+  }
+
+  .final-code {
+    flex: 1 0 240px;
+  }
+  
+  .stars {
+    flex-flow: row wrap;
+  }
+  
+  .level-block, .game-level {
+    width: 300px;
+  }
+	
+	.game-level {
+    height: auto;
+  }
+    
+  .level-block {
+    height: 50px;
+    order: -1;
+  }
+  
+  input[type='image'] {
+    width: 60px;
+  }
+	
+  .reset {
+    width: 80px;
+    height: 80px;
+  }  
+  
+	.codearea {
+		width: 100%;
+	}
   
   .answer {
-    flex: 1;
-  }
-  
-  label > span {
-    margin: 5px 0 2px 0;
-    font-size: 14px;
+    height: auto;
   }
 
-  input[type='text'] {
-    width: 200px;
-  }
+	label > span {
+		font-size: 14px;
+		padding: 6px 0;
+	}
 
-  input[type='submit'] {
-    width: 100%;
-    padding: 0 5px;
-  }
-  
+	input[type='text'], input[type='submit'] {
+		font-size: 16px;
+		height: 40px;
+	}
+ 
   footer {
     height: 50px;
   }

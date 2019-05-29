@@ -76,6 +76,8 @@ function newSymbols() {
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
   let symbolString = [];
 	
+	let level = undefined;
+	
 	for (let i = 0; i < symbolsArray.length; i++) {
 		let highLow = Math.random();
     
@@ -98,26 +100,28 @@ function newSymbols() {
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
-	}
-    /*switch(a) {
-			case 1:
-			// Normal level
-				document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
-				break;
-			case 2:
-			// Hard level
+		
+  if (level >= 2) {
+		// Normal level
+		document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
+			if (level >= 3) {
+				// Hard level
 				symbolsArray[i].style.filter = `blur(5px)`;
-				break;
-			case 3:
-			// Very hard level
-				symbolsArray[i].style.transform = `rotateZ(180deg)`;
-				break;
-			case 4:
-			// Impossible level - 'p' is a perspective value
-				let p = Math.floor(Math.random() * 100 + 100);
-				document.querySelector('.captcha').style.perspective = `${p}px`;    document.querySelector('.final_code').style.transformStyle = `preserve-3d`;    document.querySelector('.final_code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
-				break;
-		}*/
+			}
+				if (level >= 4) {
+					// Very hard level
+					symbolsArray[i].style.transform = `rotateZ(180deg)`;					
+				}
+					if (level >= 5) {
+					// Impossible level - 'p' is a perspective value
+					let p = Math.floor(Math.random() * 100 + 100);
+					document.querySelector('.captcha').style.perspective = `${p}px`;
+					document.querySelector('.final-code').style.transformStyle = `preserve-3d`;    document.querySelector('.final-code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
+					}
+		}
+		
+	}
+	
   
   return symbolsArray;	
 }
@@ -126,7 +130,7 @@ function newSymbols() {
 function compareText(){
   let text = "";
   let onesign = document.querySelectorAll('.symbol');
-	let answerArea = document.querySelector('#codearea');
+	let answerArea = document.querySelector('#writecode');
   let inputText = answerArea.value;
   
   for(let a = 0; a <= 4; a++) { 
@@ -143,4 +147,4 @@ function compareText(){
 }
 
 document.querySelector('#update').addEventListener('click', newSymbols, false);
-document.querySelector('#btn').addEventListener('click', compareText, false);
+document.querySelector('#checkcode').addEventListener('click', compareText, false);
