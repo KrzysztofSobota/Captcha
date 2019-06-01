@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', newSymbols, false);
 
 function changeStars() {
   let defaultIndex = 0; //default level, first star is always yellow
-  let star = document.querySelectorAll('.game-level')[defaultIndex];
+  var star = document.querySelectorAll('.game-level')[defaultIndex];
     
   let currentElement = undefined;
 	
@@ -35,7 +35,16 @@ function changeStars() {
 		
 		return starIndex;
   }
-		
+	
+	let starClicked = function(eventType) {
+		let starNumber = starEvents(eventType);
+			 for (let i = 1; i <= starNumber; i++) {
+				 getStars[i].classList.add('yellow');
+			 }
+
+		return starNumber;
+	};
+	
   star.addEventListener('mouseover', function(e) {
 		let starNumber = starEvents(e);
 			 for (let i = 0; i <= starNumber; i++) {    document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
@@ -53,16 +62,10 @@ function changeStars() {
 			}
    });
   	
-  star.addEventListener('click', function(e) {
-		let starNumber = starEvents(e);
-			 for (let i = 1; i <= starNumber; i++) {
-				 getStars[i].classList.add('yellow');
-			 }
-	}, {once: true});
+  star.addEventListener('click', starClicked, {once: true});
 	
-	return starEvents('click');
+	return starEvents;
 }
-
 
 
 /* Creating new combination of captcha symbols on the screen */
@@ -76,7 +79,13 @@ function newSymbols() {
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
   let symbolString = [];
 	
+	
 	let level = undefined;
+	
+		// Normal level
+		if (level >= 2) {
+			document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
+		}
 	
 	for (let i = 0; i < symbolsArray.length; i++) {
 		let highLow = Math.random();
@@ -95,33 +104,30 @@ function newSymbols() {
 		let randomColor = Math.floor(Math.random() * 8);
 		symbolsArray[i].style.color = `${inputColor[randomColor]}`;
 		
-/* Control presenting every symbol independently */
+		/* Control presenting every symbol independently */
 		let x = Math.floor(Math.random() * 10 + 15);
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
 		
-  if (level >= 2) {
-		// Normal level
-		document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
-			if (level >= 3) {
-				// Hard level
-				symbolsArray[i].style.filter = `blur(5px)`;
-			}
-				if (level >= 4) {
-					// Very hard level
-					symbolsArray[i].style.transform = `rotateZ(180deg)`;					
-				}
-					if (level >= 5) {
-					// Impossible level - 'p' is a perspective value
-					let p = Math.floor(Math.random() * 100 + 100);
-					document.querySelector('.captcha').style.perspective = `${p}px`;
-					document.querySelector('.final-code').style.transformStyle = `preserve-3d`;    document.querySelector('.final-code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
-					}
+		// Hard level
+		if (level >= 3) {
+			symbolsArray[i].style.filter = `blur(5px)`;
 		}
 		
+		// Very hard level
+		if (level >= 4) {
+			symbolsArray[i].style.transform = `rotateZ(180deg)`;
+		}
+		
+		// Impossible level - 'p' is a perspective value
+		if (level >= 5) {
+			let p = Math.floor(Math.random() * 100 + 100);
+			document.querySelector('.captcha').style.perspective = `${p}px`;
+			document.querySelector('.final-code').style.transformStyle = `preserve-3d`;    document.querySelector('.final-code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
+		}
 	}
-	
+		
   
   return symbolsArray;	
 }

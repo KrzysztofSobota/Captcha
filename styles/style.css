@@ -10,7 +10,7 @@ html, body {
 }
 
 .container {
-  width: 920px;
+  width: 960px;
   margin: 0 auto -20px auto;
   background-color: hsl(45, 15%, 92%);
 }
@@ -22,7 +22,7 @@ h2, h3 {
   color: hsl(214, 75%, 21%);
 }
 
-h1 { font-size: 2em;}
+h1 { font-size: 2em; height: auto; margin: 0;}
 h2 { font-size: 1.5em;}
 h3 { font-size: 1.25em;}
 
@@ -32,6 +32,7 @@ a {
 }
 
 p {
+	width: 100%;
   text-align: justify;
   text-indent: 1em;
   line-height: 1.5em;
@@ -47,7 +48,6 @@ p {
 .main-header {
   width: 100%;
   height: 120px;
-  flex-flow: row wrap;
   align-content: center;
   background-color: hsl(214, 75%, 23%);
 }
@@ -55,11 +55,6 @@ p {
 .main-header > a {
   width: 100%;
   height: 100%;
-}
-
-h1 {
-  height: auto;
-  flex-flow: row nowrap;
 }
 
 .gamename {
@@ -114,7 +109,7 @@ tr:nth-child(even) {
 .stars, .captcha, .codearea {
 	display: flex;
 	margin: 10px auto;
-  width: 500px;  
+  width: 500px;
 }
 
 .answer {
@@ -175,7 +170,6 @@ input[type='image'] {
 	font: normal 60px 'Arial';
 	background-color: transparent;
   border-color: transparent;
-/*  filter: blur(5px);*/
 	float: left;
 }
 
@@ -224,8 +218,10 @@ footer > span {
   font-style: italic;
 }
 
-@media screen and (min-width: 768px) and (max-width: 920px) {
-	
+@media screen and (min-width: 768px) and (max-width: 959px) {
+	.container {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 480px) and (max-width: 768px) {
@@ -250,59 +246,20 @@ footer > span {
   }
 	
   main {
-		padding: 5px 10px;
+		padding: 8px;
   }
-  
-	article, section, h2 {
-		padding: 0;
-	}
-	
-	table {
-		margin: 5px 0;
-	}
-	
-  .captcha {
-  	width: 450px;
+  	
+  .stars, .captcha, .codearea {
+		width: 450px;
   }
 
-  .stars, .captcha, .level-block, .game-level {
-		margin: 5px 0;
-    justify-content: center;
-  }
+  input[type='image'] {
+		width: 54px;
+	}
 
-  .final-code {
-    flex: 1 0 240px;
-  }
-  
-  .stars {
-    flex-flow: row wrap;
-  }
-  
-  .level-block, .game-level {
-    width: 300px;
-  }
-	
-	.game-level {
+	.game-level, input[type='image'] {
     height: auto;
   }
-    
-  .level-block {
-    height: 50px;
-    order: -1;
-  }
-  
-  input[type='image'] {
-    width: 60px;
-  }
-	
-  .reset {
-    width: 100px;
-    height: 100px;
-  }  
-  
-	.codearea {
-		width: 100%;
-	}
 }
 
 @media screen and (max-width: 480px) {
@@ -319,89 +276,76 @@ footer > span {
   }
 	
   h1 > img {
-    height: 40px;
+    height: 32px;
   }
   
   .gamename {
-    font-size: 50px;
-    padding-left: 8px;
+    font-size: 48px;
+    padding-left: 10px;
   }
 	
   main {
-		padding: 5px 10px;
+		padding: 0 6px;
     margin-bottom: 60px;
-  }
-  
-	article, section, h2 {
+  }	
+	
+	 article, section, h2 {
 		padding: 0;
 	}
-  
-	section, .stars, .captcha, .level-block, .game-level, table {		
-    margin: 5px 0;
-	}
 	
-	h3 {
-		padding-left: 5px;
+	section {
+		margin: 5px 0;
 	}
-	
+  	
   table {
+		max-width: 290px;
+		margin: 10px 5px;
 		font-size: 14px;
   }
   
-  .stars, .captcha, table {
-    width: 100%;
-		max-width: 400px;
+  th, td {
+		padding: 3px 5px;
+	}
+	
+  .stars, .captcha, .codearea, .level-block, .game-level {
+		width: 300px;		
   }
 
-  .stars, .captcha, .level-block, .game-level {
-    justify-content: center;
-  }
-
-  .final-code {
-    flex: 1 0 240px;
+	.game-level, input[type='image'] {
+    height: auto;
   }
   
   .stars {
     flex-flow: row wrap;
   }
   
-  .level-block, .game-level {
-    width: 300px;
-  }
-	
-	.game-level {
-    height: auto;
-  }
-    
-  .level-block {
-    height: 50px;
-    order: -1;
-  }
-  
   input[type='image'] {
     width: 60px;
   }
-	
-  .reset {
-    width: 80px;
-    height: 80px;
-  }  
-  
-	.codearea {
-		width: 100%;
-	}
-  
-  .answer {
-    height: auto;
+	    
+  .level-block {
+    height: 50px;
+    order: -1;
+		margin: 0 0 10px 0;
   }
 
+	.symbol {
+		width: 19%;
+		font: normal 42px 'Arial';
+	}
+	
+  .reset {
+    width: 60px;
+    height: 60px;
+  }  
+  
 	label > span {
 		font-size: 14px;
 		padding: 6px 0;
 	}
 
 	input[type='text'], input[type='submit'] {
-		font-size: 16px;
+		font-size: 15px;
 		height: 40px;
 	}
  
