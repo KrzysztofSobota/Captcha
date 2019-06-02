@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Captcha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Captcha system">
   <meta name="author" content="Krzysztof Sobota">
-  <title>Captcha</title>
   <link rel="stylesheet" href="styles/style.css">
   <link href="https://fonts.googleapis.com/css?family=Exo+2:200,400" rel="stylesheet">
-<head>
+</head>
 <body>
   <div class="container">
-    <header class="game_name">
+    <header class="main-header">
       <a href="">
         <h1>
-          <img src="/captcha(small).svg" height="60" alt="captcha symbol">
-          <span class="test">Captcha</span>
+          <img src="/captcha(small).svg" height="60" alt="">
+          <span class="gamename">Captcha</span>
         </h1>
       </a>
     </header>
@@ -25,11 +25,11 @@
         <h2>Client-side captcha</h2>
         <section>
           <h3>Before the code will be displayed...</h3>
-         <p>My another idea is game based on common used in the Internet security - "captcha". My game is case-sensitive version, but what else is so special here?</p>
-         <p>You can choose from any of 5 difficulty levels of this "captcha". Name of recently selected level (short text message) are showed inside the box in the right side of the stars. Description what "surprise" is included in every level you can find in the table below.</p>
-         <p>You can start game instantly in "easy" (default) level or click any of the non-yellow star. If you made a choice and decide to change the level, refresh the page (F5) or click yellow reset button near  the captcha code. This will change the game level and the code.</p>
-         <p>I believe that you can find something perfect just for you. Not too easy and not too hard.</p>
-         <p>So go on and try captcha in a one of your favourite levels!</p>
+					<p>My another idea is game based on common used in the Internet security - "captcha". My game is case-sensitive version, but what else is so special here?</p>
+					<p>You can choose from any of 5 difficulty levels of this "captcha". Name of recently selected level (short text message) are showed inside the box in the right side of the stars. Description what "surprise" is included in every level you can find in the table below.</p>
+					<p>You can start game instantly in "easy" (default) level or click any of the non-yellow star. If you made a choice and decide to change the level, refresh the page (F5) or click yellow reset button near  the captcha code. This will change the game level and the code.</p>
+					<p>I believe that you can find something perfect just for you. Not too easy and not too hard.</p>
+					<p>So go on and try captcha in a one of your favourite levels!</p>
           <table>
           <tr>
             <th>Level</th>
@@ -57,15 +57,15 @@
           </tr>
         </table>
           <div class="stars">
-            <div class="stars_level">
-              <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="60" alt="easy level">
-              <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="60" alt="normal level">
-              <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="60" alt="hard level">
-              <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="60" alt="very hard level">
-              <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="60" alt="impossible level">
+            <div class="game-level">
+              <input type="image" class="star yellow" id="star1" src="/Symbol_Star(color).png" width="60" alt="easy level" value="1">
+              <input type="image" class="star" id="star2" src="/Symbol_Star.png" width="60" alt="normal level" value="2">
+              <input type="image" class="star" id="star3" src="/Symbol_Star.png" width="60" alt="hard level" value="3">
+              <input type="image" class="star" id="star4" src="/Symbol_Star.png" width="60" alt="very hard level" value="4">
+              <input type="image" class="star" id="star5" src="/Symbol_Star.png" width="60" alt="impossible level" value="5">
             </div>
-            <div class="level_block">
-              <span id="level_text">Easy level</span>
+            <div class="level-block">
+              <span id="level-text">Easy level</span>
             </div>
           </div>
         </section>
@@ -73,7 +73,7 @@
           <h3>Captcha code to put the answer</h3>
           <div class="captcha" id="perspective">
             <div class="noise">
-              <div class="final_code">
+              <div class="final-code">
                 <div class="symbol" id="symbol1"></div>
                 <div class="symbol" id="symbol2"></div>
                 <div class="symbol" id="symbol3"></div>
@@ -87,12 +87,14 @@
         <section>
           <h3>Final part of the game - code answer</h3>
           <p>The right answer is the 5-symbol mix of digits and letters. Entering good code will be the end of mistery, but if the code is wrong borders of the input area will be display in red color.</p>
-          <label for="codearea">
-            <span>Input captcha code into the form and click the button:</span>
-          </label>
-          <div class="answer">
-            <input type="text" id="codearea" name="codearea" placeholder="Write your code here">
-            <input type="submit" id="btn" value="Check code">
+          <div class="codearea">
+						<div class="answer">
+							<label for="writecode">
+								<span>Input captcha code into the form and click the button:</span>
+							</label>
+							<input type="text" id="writecode" name="writecode" placeholder="Write your code here">
+							<input type="submit" id="checkcode" value="Check code">
+						</div>          	
           </div>
         </section>
       </article>
