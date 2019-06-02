@@ -37,12 +37,12 @@ function changeStars() {
   }
 	
 	let starClicked = function(eventType) {
-		let starNumber = starEvents(eventType);
-			 for (let i = 1; i <= starNumber; i++) {
-				 getStars[i].classList.add('yellow');
-			 }
-
-		return starNumber;
+		let starNumber = starEvents(eventType); 
+		for (let i = 1; i <= starNumber; i++) { 
+			getStars[i].classList.add('yellow'); 
+		} 
+		
+		newSymbols(starNumber);
 	};
 	
   star.addEventListener('mouseover', function(e) {
@@ -70,7 +70,7 @@ function changeStars() {
 
 /* Creating new combination of captcha symbols on the screen */
 
-function newSymbols() {
+function newSymbols(starNumber) {
   let pos1 = document.querySelector('#symbol1');
 	let pos2 = document.querySelector('#symbol2');
 	let pos3 = document.querySelector('#symbol3');
@@ -80,7 +80,7 @@ function newSymbols() {
   let symbolString = [];
 	
 	
-	let level = undefined;
+	let level = starNumber;
 	
 		// Normal level
 		if (level >= 2) {
