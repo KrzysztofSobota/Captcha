@@ -124,6 +124,7 @@ tr:nth-child(even) {
 
 .captcha {  
   background-color: white;
+	height: 100px;
 }
 
 .game-level {
@@ -160,11 +161,6 @@ input[type='image'] {
   width: 80%;
 }
 
-.final-code {
-  width: auto;
-  height: 100%;
-}
-
 .symbol {
 	width: 18%;
 	font: normal 60px 'Arial';
@@ -175,10 +171,10 @@ input[type='image'] {
 
 .reset {
   width: 100px;
-	height: 100px;
+	height: 100%;
   border-width: 0;
-  background-image: url('/reset-button.svg');
-  background-size: cover;
+	background-image: url(/reset-button.svg);
+	background-size: contain;
 	cursor: pointer;
 }
 
@@ -285,11 +281,10 @@ footer > span {
   }
 	
   main {
-		padding: 0 6px;
-    margin-bottom: 60px;
+		padding: 0 5px;
   }	
 	
-	 article, section, h2 {
+	article, section, h2 {
 		padding: 0;
 	}
 	
@@ -311,6 +306,14 @@ footer > span {
 		width: 300px;		
   }
 
+	.captcha {
+		height: 70px;
+	}
+	
+	.codearea {
+		margin: 0 auto 20px;
+	}
+	
 	.game-level, input[type='image'] {
     height: auto;
   }
@@ -319,10 +322,6 @@ footer > span {
     flex-flow: row wrap;
   }
   
-  input[type='image'] {
-    width: 60px;
-  }
-	    
   .level-block {
     height: 50px;
     order: -1;
@@ -330,18 +329,17 @@ footer > span {
   }
 
 	.symbol {
-		width: 19%;
 		font: normal 42px 'Arial';
 	}
 	
   .reset {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
   }  
   
 	label > span {
 		font-size: 14px;
-		padding: 6px 0;
+		padding: 0 0 5px 0;
 	}
 
 	input[type='text'], input[type='submit'] {

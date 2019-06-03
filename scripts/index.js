@@ -23,10 +23,8 @@ function changeStars() {
   let getStars = document.querySelectorAll('.star');
   let levelText = document.querySelector('#level-text');
   	
-	let eventType = function(e) {
-		return e.type;
-	};
-	
+	let n = 0;
+	let numberClicked = 0;
   function starEvents(e) {
     currentElement = e.target.id;
 		let starIndex = findIndex(currentElement);    
@@ -36,15 +34,18 @@ function changeStars() {
 		return starIndex;
   }
 	
-	let starClicked = function(eventType) {
-		let starNumber = starEvents(eventType); 
-		for (let i = 1; i <= starNumber; i++) { 
-			getStars[i].classList.add('yellow'); 
-		} 
+	function starClicked(eventType) {
+		let numberClicked = starEvents(eventType); 
+			for (let i = 1; i <= numberClicked; i++) {
+				getStars[i].classList.remove('star');
+				getStars[i].classList.add('yellow'); 
+			}
+		n > 0 ? 0 : n;
+		n++;
 		
-		newSymbols(starNumber);
+		newSymbols(numberClicked);return numberClicked;
 	};
-	
+		
   star.addEventListener('mouseover', function(e) {
 		let starNumber = starEvents(e);
 			 for (let i = 0; i <= starNumber; i++) {    document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
@@ -54,12 +55,12 @@ function changeStars() {
   star.addEventListener('mouseout', function(e) {
     let starNumber = starEvents(e);
        for (let i = 1; i <= starNumber; i++) {
-        document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
+         document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
        }
-     		
-			if (eventType = 'click') {
 				
-			}
+			if (n > 0) {
+				
+				}		
    });
   	
   star.addEventListener('click', starClicked, {once: true});
@@ -70,17 +71,18 @@ function changeStars() {
 
 /* Creating new combination of captcha symbols on the screen */
 
-function newSymbols(starNumber) {
+function newSymbols(numberClicked) {
   let pos1 = document.querySelector('#symbol1');
 	let pos2 = document.querySelector('#symbol2');
 	let pos3 = document.querySelector('#symbol3');
 	let pos4 = document.querySelector('#symbol4');
 	let pos5 = document.querySelector('#symbol5');
+	
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
   let symbolString = [];
 	
-	
-	let level = starNumber;
+	// level is one number bigger than clicked star (index rules)
+	let level = numberClicked + 1;
 	
 		// Normal level
 		if (level >= 2) {
@@ -120,14 +122,28 @@ function newSymbols(starNumber) {
 			symbolsArray[i].style.transform = `rotateZ(180deg)`;
 		}
 		
-		// Impossible level - 'p' is a perspective value
-		if (level >= 5) {
-			let p = Math.floor(Math.random() * 100 + 100);
-			document.querySelector('.captcha').style.perspective = `${p}px`;
-			document.querySelector('.final-code').style.transformStyle = `preserve-3d`;    document.querySelector('.final-code').style.transform = `rotateX(15deg) rotateY(-10deg)`;
+		// Impossible level
+		if (level === 5) {
+			let browserWidth = window.innerWidth;
+			
+			function FontChange(a, b) {
+				let newFontSize = Math.floor(Math.random() * a) + b;
+				symbolsArray[i].style.fontSize = `${newFontSize}px`;
+				
+				return newFontSize;
+			}		
+			
+			if (browserWidth <= 480) {
+				FontChange(20, 30); // new font size range 30-50 px
+			}
+			else if (480 < browserWidth <= 720) {
+				FontChange(20, 40); // new font size range 40-60 px
+			}
+			else {
+				FontChange(20, 50); // new font size range 50-70 px
+			}
 		}
 	}
-		
   
   return symbolsArray;	
 }
