@@ -22,9 +22,7 @@ function changeStars() {
   
   let getStars = document.querySelectorAll('.star');
   let levelText = document.querySelector('#level-text');
-  	
-	let n = 0;
-	let numberClicked = 0;
+	
   function starEvents(e) {
     currentElement = e.target.id;
 		let starIndex = findIndex(currentElement);    
@@ -33,6 +31,9 @@ function changeStars() {
 		
 		return starIndex;
   }
+  	
+	let n = 0;
+	let numberClicked = 0;
 	
 	function starClicked(eventType) {
 		let numberClicked = starEvents(eventType); 
@@ -41,27 +42,30 @@ function changeStars() {
 				getStars[i].classList.add('yellow'); 
 			}
 		n > 0 ? 0 : n;
-		n++;
-		
-		newSymbols(numberClicked);return numberClicked;
+		n++;		
+		newSymbols(numberClicked);
 	};
 		
-  star.addEventListener('mouseover', function(e) {
-		let starNumber = starEvents(e);
-			 for (let i = 0; i <= starNumber; i++) {    document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
-			 }			
-  });
-  
-  star.addEventListener('mouseout', function(e) {
-    let starNumber = starEvents(e);
-       for (let i = 1; i <= starNumber; i++) {
-         document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
-       }
-				
-			if (n > 0) {
-				
-				}		
-   });
+	
+	star.addEventListener('mouseover', function(e) {
+			if (n = 1) {return ;}
+			else {
+				let starNumber = starEvents(e);
+					 for (let i = 0; i <= starNumber; i++) {
+						 document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
+					 }				
+			}
+		});
+
+	star.addEventListener('mouseout', function(e) {
+		if (n = 1) {return ;}
+		else {
+			let starNumber = starEvents(e);
+				 for (let i = 1; i <= starNumber; i++) {
+					 document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
+				 }
+		}
+	});
   	
   star.addEventListener('click', starClicked, {once: true});
 	
@@ -81,9 +85,9 @@ function newSymbols(numberClicked) {
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
   let symbolString = [];
 	
-	// level is one number bigger than clicked star (index rules)
+		// level is one number bigger than clicked star (index rules)
 	let level = numberClicked + 1;
-	
+
 		// Normal level
 		if (level >= 2) {
 			document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
@@ -95,11 +99,13 @@ function newSymbols(numberClicked) {
 		// 50/50 chance for getting digit or letter
 		if (highLow < 0.5) {
 			let mySign = Math.ceil(Math.random() * 9 + 48); // digits only
-      symbolsArray[i].innerHTML = `&#${mySign}`; symbolString.push(String.fromCharCode(mySign));
+      symbolsArray[i].innerHTML = `&#${mySign}`;
+			symbolString.push(String.fromCharCode(mySign));
 		} 
 		else {
 			let mySign = Math.ceil(Math.random() * 25 + 65); // Upper-case letters only	
-      symbolsArray[i].innerHTML = `&#${mySign}`; symbolString.push(String.fromCharCode(mySign));
+      symbolsArray[i].innerHTML = `&#${mySign}`;
+			symbolString.push(String.fromCharCode(mySign));
 		}
 		    
 		let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
@@ -122,17 +128,17 @@ function newSymbols(numberClicked) {
 			symbolsArray[i].style.transform = `rotateZ(180deg)`;
 		}
 		
-		// Impossible level
+	// Impossible level
 		if (level === 5) {
 			let browserWidth = window.innerWidth;
-			
+
 			function FontChange(a, b) {
 				let newFontSize = Math.floor(Math.random() * a) + b;
 				symbolsArray[i].style.fontSize = `${newFontSize}px`;
-				
+
 				return newFontSize;
 			}		
-			
+
 			if (browserWidth <= 480) {
 				FontChange(20, 30); // new font size range 30-50 px
 			}
@@ -144,6 +150,7 @@ function newSymbols(numberClicked) {
 			}
 		}
 	}
+		
   
   return symbolsArray;	
 }
@@ -168,5 +175,10 @@ function compareText(){
   }
 }
 
+/*document.querySelector('#update').addEventListener('click', function resetAll() {
+	let lvl = 1;
+	newSymbols(lvl);	
+}, false);*/
+document.querySelector('#update').addEventListener('click', changeStars, false);
 document.querySelector('#update').addEventListener('click', newSymbols, false);
 document.querySelector('#checkcode').addEventListener('click', compareText, false);
