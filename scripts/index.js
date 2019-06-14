@@ -6,129 +6,127 @@ window.addEventListener('DOMContentLoaded', newSymbols, false);
 /* Change level of the game depending on user choice */
 
 function changeStars() {
-  let defaultIndex = 0; //default level, first star is always yellow
-  var star = document.querySelectorAll('.game-level')[defaultIndex];
-    
-  let currentElement = undefined;
+	/*  */
+	const updateAltText = currentLevelIndex => {
+		let levelText = document.querySelector('#level-text');
+		/* 'currentLevelIndex + 1' replaces event 'currentElement' */
+		levelText.textContent = document.querySelector(`#star${currentLevelIndex + 1}`).alt;
+	}
 	
-  /* Get index of element from NodeList */
-  function findIndex() {    
-    let child = document.getElementById(`${currentElement}`);
-    let parent = child.parentNode;
-    let starNumber = Array.prototype.indexOf.call(parent.children, child);
-    
-    return starNumber;
-  }
-  
-  let getStars = document.querySelectorAll('.star');
-  let levelText = document.querySelector('#level-text');
+	/* Level number - default is 1 */
+	const getNumber = str => Number(str.match(/\d+/)[0]) || 1;
 	
-  function starEvents(e) {
-    currentElement = e.target.id;
-		let starIndex = findIndex(currentElement);    
-    
-    levelText.textContent =  document.querySelector(`#${currentElement}`).alt;
+	/* Star index is always one number lower than level number (indexing rules) */
+	const getStarIndex = event => getNumber(event.target.id) - 1;
+	
+	let stars = document.querySelectorAll('.star');
+	
+	const handleStarClick = event => {
+		/* FIRST - blocking possibility to change star behaviour by mouse events */
+		gameLevel.removeEventListener('mouseover', highlightStars);
+		gameLevel.removeEventListener('mouseout', highlightStars);
 		
-		return starIndex;
-  }
-  	
-	let n = 0;
-	let numberClicked = 0;
-	
-	function starClicked(eventType) {
-		let numberClicked = starEvents(eventType); 
-			for (let i = 1; i <= numberClicked; i++) {
-				getStars[i].classList.remove('star');
-				getStars[i].classList.add('yellow'); 
-			}
-		n > 0 ? 0 : n;
-		n++;		
-		newSymbols(numberClicked);
-	};
-		
-	
-	star.addEventListener('mouseover', function(e) {
-			if (n = 1) {return ;}
-			else {
-				let starNumber = starEvents(e);
-					 for (let i = 0; i <= starNumber; i++) {
-						 document.querySelector(`#star${i+1}`).src = '/Symbol_Star(color).png';
-					 }				
-			}
-		});
-
-	star.addEventListener('mouseout', function(e) {
-		if (n = 1) {return ;}
-		else {
-			let starNumber = starEvents(e);
-				 for (let i = 1; i <= starNumber; i++) {
-					 document.querySelector(`#star${i+1}`).src = '/Symbol_Star.png';
-				 }
+		/* SECOND - making all needed star with yellow color */
+		const stars = document.querySelectorAll('.star');
+		for (let i = 0; i <= getStarIndex(event); i++) {
+			stars[i].classList.add('yellow');
 		}
-	});
-  	
-  star.addEventListener('click', starClicked, {once: true});
+
+		/* THIRD - trigger newSymbols() function with chosen level (star) */
+		const levelNumber = getNumber(event.target.id);
+		
+		newSymbols(levelNumber);
+	};
+
+	const highlightStars = event => {
+		const starIndex = getStarIndex(event);
+		updateAltText(starIndex);
+		for (let i = 0; i <= starIndex; i++) {
+			const star = document.querySelector(`#star${i + 1}`);
+			star.classList.toggle('yellow');
+		}
+	};
+
+	const behindArea = (event) => {
+		let target = event.target.className;
+		getStarIndex
+		if (target === 'star' || target === 'stars') {
+			updateAltText(0);
+		}
+	};
 	
-	return starEvents;
+	document.addEventListener("mouseout", behindArea);
+	
+	updateAltText(0); // update current level text
+	const gameLevel = document.querySelector('.game-level');
+	gameLevel.addEventListener("mouseover", highlightStars);
+	gameLevel.addEventListener("mouseout", highlightStars);
+	gameLevel.addEventListener('click', handleStarClick, {once: true});
 }
 
 
 /* Creating new combination of captcha symbols on the screen */
 
 function newSymbols(numberClicked) {
-  let pos1 = document.querySelector('#symbol1');
-	let pos2 = document.querySelector('#symbol2');
-	let pos3 = document.querySelector('#symbol3');
-	let pos4 = document.querySelector('#symbol4');
-	let pos5 = document.querySelector('#symbol5');
-	
-	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
-  let symbolString = [];
-	
-		// level is one number bigger than clicked star (index rules)
-	let level = numberClicked + 1;
+	const pos1 = document.querySelector('#symbol1');
+	const pos2 = document.querySelector('#symbol2');
+	const pos3 = document.querySelector('#symbol3');
+	const pos4 = document.querySelector('#symbol4');
+	const pos5 = document.querySelector('#symbol5');
 
-		// Normal level
-		if (level >= 2) {
-			document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
-		}
-	
+	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
+	let symbolString = [];
+
+	for (let i = 0; i < symbolsArray.length; i++) {
+		symbolsArray[i].removeAttribute('backgroundImage');
+		symbolsArray[i].removeAttribute('filter');
+		symbolsArray[i].removeAttribute('transform');
+		symbolsArray[i].removeAttribute('fontSize');
+	}
+
+	// level is one number bigger than clicked star (index rules)
+	let level = numberClicked;
+console.log(`lvl - ${level}`);
+	// Normal level
+	if (level >= 2) {
+		document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
+	}
+
 	for (let i = 0; i < symbolsArray.length; i++) {
 		let highLow = Math.random();
-    
+
 		// 50/50 chance for getting digit or letter
 		if (highLow < 0.5) {
 			let mySign = Math.ceil(Math.random() * 9 + 48); // digits only
-      symbolsArray[i].innerHTML = `&#${mySign}`;
+			symbolsArray[i].innerHTML = `&#${mySign}`;
 			symbolString.push(String.fromCharCode(mySign));
-		} 
-		else {
+		} else {
 			let mySign = Math.ceil(Math.random() * 25 + 65); // Upper-case letters only	
-      symbolsArray[i].innerHTML = `&#${mySign}`;
+			symbolsArray[i].innerHTML = `&#${mySign}`;
 			symbolString.push(String.fromCharCode(mySign));
 		}
-		    
+
 		let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
 		let randomColor = Math.floor(Math.random() * 8);
 		symbolsArray[i].style.color = `${inputColor[randomColor]}`;
-		
+
 		/* Control presenting every symbol independently */
 		let x = Math.floor(Math.random() * 10 + 15);
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
 		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
-		
+
 		// Hard level
 		if (level >= 3) {
 			symbolsArray[i].style.filter = `blur(5px)`;
 		}
-		
+
 		// Very hard level
 		if (level >= 4) {
 			symbolsArray[i].style.transform = `rotateZ(180deg)`;
 		}
-		
-	// Impossible level
+
+		// Impossible level
 		if (level === 5) {
 			let browserWidth = window.innerWidth;
 
@@ -137,48 +135,50 @@ function newSymbols(numberClicked) {
 				symbolsArray[i].style.fontSize = `${newFontSize}px`;
 
 				return newFontSize;
-			}		
+			}
 
 			if (browserWidth <= 480) {
 				FontChange(20, 30); // new font size range 30-50 px
-			}
-			else if (480 < browserWidth <= 720) {
+			} else if (480 < browserWidth <= 720) {
 				FontChange(20, 40); // new font size range 40-60 px
-			}
-			else {
+			} else {
 				FontChange(20, 50); // new font size range 50-70 px
 			}
 		}
 	}
-		
-  
-  return symbolsArray;	
+
+	return symbolsArray;
 }
 
 /* Checking if input text is exactly the same as generated captcha code (game is case-sensitive!) */
-function compareText(){
-  let text = "";
-  let onesign = document.querySelectorAll('.symbol');
+function compareText() {
+	let text = "";
+	let onesign = document.querySelectorAll('.symbol');
 	let answerArea = document.querySelector('#writecode');
-  let inputText = answerArea.value;
-  
-  for(let a = 0; a <= 4; a++) { 
-    text += onesign[a].innerText;
-  }
-    
-  if(text == inputText) {
-    alert('Great job !!!');
-  }
-  else {
-		answerArea.style.border = '4px solid #ff0000';
+	let inputText = answerArea.value;
+
+	for (let a = 0; a <= 4; a++) {
+		text += onesign[a].innerText;
+	}
+
+	if (text == inputText) {
+		alert('Great job !!!');
+	} else {
+		answerArea.style.border = 'thin solid #ff0000';
 		answerArea.style.backgroundColor = 'rgba(219, 63, 63, 0.92)';
-  }
+	}
 }
 
-/*document.querySelector('#update').addEventListener('click', function resetAll() {
-	let lvl = 1;
-	newSymbols(lvl);	
-}, false);*/
-document.querySelector('#update').addEventListener('click', changeStars, false);
-document.querySelector('#update').addEventListener('click', newSymbols, false);
+function resetAll() {
+	document.querySelector('.noise').removeAttribute('backgroundImage');
+
+	for (let i = 1; i <= 5; i++) {
+		document.querySelector(`#symbol${i}`).removeAttribute('filter');
+		document.querySelector(`#symbol${i}`).removeAttribute('transform');
+		document.querySelector(`#symbol${i}`).removeAttribute('fontSize');
+	}
+}
+
+document.querySelector('#update').addEventListener('click', resetAll, false);
+
 document.querySelector('#checkcode').addEventListener('click', compareText, false);

@@ -195,6 +195,14 @@ input[type='text'] {
 
 input[type='submit'] {
   width: auto;
+	margin-left: 3px;
+	background-color: hsl(215, 87%, 76%);
+	border: 4px outset hsl(228, 5%, 55%);
+}
+
+input[type='submit']:hover {
+	background-color: hsl(215, 87%, 76%);
+	border: 4px inset hsl(228, 5%, 55%);
 }
 
 footer {
