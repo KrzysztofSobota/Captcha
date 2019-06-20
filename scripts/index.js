@@ -22,7 +22,7 @@ function changeStars() {
 	let stars = document.querySelectorAll('.star');
 	
 	const handleStarClick = event => {
-		/* FIRST - blocking possibility to change star behaviour by mouse events */
+		/* FIRST - blocking possibility to change any star behaviour from mouseover and mouseout events */
 		gameLevel.removeEventListener('mouseover', highlightStars);
 		gameLevel.removeEventListener('mouseout', highlightStars);
 		
@@ -32,7 +32,7 @@ function changeStars() {
 			stars[i].classList.add('yellow');
 		}
 
-		/* THIRD - trigger newSymbols() function with chosen level (star) */
+		/* THIRD - trigger newSymbols() function with parameter equal to chosen level (star) */
 		const levelNumber = getNumber(event.target.id);
 		
 		newSymbols(levelNumber);
@@ -47,7 +47,7 @@ function changeStars() {
 		}
 	};
 
-	const behindArea = (event) => {
+	const behindArea = event => {
 		let target = event.target.className;
 		getStarIndex
 		if (target === 'star' || target === 'stars') {
@@ -62,8 +62,16 @@ function changeStars() {
 	gameLevel.addEventListener("mouseover", highlightStars);
 	gameLevel.addEventListener("mouseout", highlightStars);
 	gameLevel.addEventListener('click', handleStarClick, {once: true});
+	
+	const backToDefault = event => {
+//		newSymbols(1);
+		updateAltText(0);
+		handleStarClick(getStarIndex(event) === 0);
+	};
+	const resetBtn = document.querySelector('#update');
+	resetBtn.addEventListener('click', updateAltText(0));
+	resetBtn.addEventListener('click', backToDefault);
 }
-
 
 /* Creating new combination of captcha symbols on the screen */
 
@@ -73,17 +81,24 @@ function newSymbols(numberClicked) {
 	const pos3 = document.querySelector('#symbol3');
 	const pos4 = document.querySelector('#symbol4');
 	const pos5 = document.querySelector('#symbol5');
-
+	
+		
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
 	let symbolString = [];
 
-	for (let i = 0; i < symbolsArray.length; i++) {
-		symbolsArray[i].removeAttribute('backgroundImage');
-		symbolsArray[i].removeAttribute('filter');
-		symbolsArray[i].removeAttribute('transform');
-		symbolsArray[i].removeAttribute('fontSize');
-	}
-
+	function resetAll() {
+		document.querySelector('.noise').style.backgroundImage = '';				
+		for (let i = 1; i <= symbolsArray.length; i++) {
+			document.querySelector(`#symbol${i}`).style.filter = 'blur(0px)';
+			document.querySelector(`#symbol${i}`).style.transform = 'rotateZ(0deg)';
+			document.querySelector(`#symbol${i}`).style.fontSize = '60px';
+		}
+	};
+  
+	const resetBtn = document.querySelector('#update');
+	resetBtn.addEventListener('click', resetAll, false);
+	
+	
 	// level is one number bigger than clicked star (index rules)
 	let level = numberClicked;
 console.log(`lvl - ${level}`);
@@ -94,23 +109,23 @@ console.log(`lvl - ${level}`);
 
 	for (let i = 0; i < symbolsArray.length; i++) {
 		let highLow = Math.random();
-
-		// 50/50 chance for getting digit or letter
-		if (highLow < 0.5) {
-			let mySign = Math.ceil(Math.random() * 9 + 48); // digits only
-			symbolsArray[i].innerHTML = `&#${mySign}`;
-			symbolString.push(String.fromCharCode(mySign));
-		} else {
-			let mySign = Math.ceil(Math.random() * 25 + 65); // Upper-case letters only	
-			symbolsArray[i].innerHTML = `&#${mySign}`;
-			symbolString.push(String.fromCharCode(mySign));
-		}
+		let mySign = undefined;
+		
+		/* 'highLow' values (< 0.5 or > 0.5) in Math.random() range describes 50% chance for getting digit or letter every time */
+		highLow < 0.5 ? mySign = Math.ceil(Math.random() * 9 + 48) : mySign = Math.ceil(Math.random() * 25 + 65);
+		
+		/* 'mySign' ranges 48-57 and 65-90 are for HTML charcode signs (numbers or digits respectively) */
+		
+		/* 'innerHTML' instead 'textContent', because only 'innerHTML' generates proper string form on output */
+		symbolsArray[i].innerHTML = `&#${mySign}`;
+		symbolString.push(String.fromCharCode(mySign));
+		
 
 		let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
 		let randomColor = Math.floor(Math.random() * 8);
 		symbolsArray[i].style.color = `${inputColor[randomColor]}`;
 
-		/* Control presenting every symbol independently */
+		/* Transforming every symbol independently */
 		let x = Math.floor(Math.random() * 10 + 15);
 		let y = Math.floor(Math.random() * 5 + 10);
 		let z = Math.floor(Math.random() * 20 - 10);
@@ -139,9 +154,11 @@ console.log(`lvl - ${level}`);
 
 			if (browserWidth <= 480) {
 				FontChange(20, 30); // new font size range 30-50 px
-			} else if (480 < browserWidth <= 720) {
+			} 
+			else if (480 < browserWidth <= 720) {
 				FontChange(20, 40); // new font size range 40-60 px
-			} else {
+			} 
+			else {
 				FontChange(20, 50); // new font size range 50-70 px
 			}
 		}
@@ -169,16 +186,6 @@ function compareText() {
 	}
 }
 
-function resetAll() {
-	document.querySelector('.noise').removeAttribute('backgroundImage');
-
-	for (let i = 1; i <= 5; i++) {
-		document.querySelector(`#symbol${i}`).removeAttribute('filter');
-		document.querySelector(`#symbol${i}`).removeAttribute('transform');
-		document.querySelector(`#symbol${i}`).removeAttribute('fontSize');
-	}
-}
-
-document.querySelector('#update').addEventListener('click', resetAll, false);
+/*document.querySelector('#update').addEventListener('click', resetAll, false);*/
 
 document.querySelector('#checkcode').addEventListener('click', compareText, false);
