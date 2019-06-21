@@ -41,7 +41,7 @@ function changeStars() {
 	const highlightStars = event => {
 		const starIndex = getStarIndex(event);
 		updateAltText(starIndex);
-		for (let i = 0; i <= starIndex; i++) {
+		for (let i = 1; i <= starIndex; i++) {
 			const star = document.querySelector(`#star${i + 1}`);
 			star.classList.toggle('yellow');
 		}
@@ -49,87 +49,109 @@ function changeStars() {
 
 	const behindArea = event => {
 		let target = event.target.className;
-		getStarIndex
+		
 		if (target === 'star' || target === 'stars') {
-			updateAltText(0);
+//			updateAltText(0);
 		}
 	};
 	
-	document.addEventListener("mouseout", behindArea);
+//	document.addEventListener("mouseover", behindArea);
 	
-	updateAltText(0); // update current level text
+	
+	 // update current level text updateAltText(0);
 	const gameLevel = document.querySelector('.game-level');
 	gameLevel.addEventListener("mouseover", highlightStars);
 	gameLevel.addEventListener("mouseout", highlightStars);
 	gameLevel.addEventListener('click', handleStarClick, {once: true});
-	
-	const backToDefault = event => {
-//		newSymbols(1);
-		updateAltText(0);
-		handleStarClick(getStarIndex(event) === 0);
-	};
-	const resetBtn = document.querySelector('#update');
-	resetBtn.addEventListener('click', updateAltText(0));
-	resetBtn.addEventListener('click', backToDefault);
+	gameLevel.addEventListener("mouseout", behindArea);
 }
 
-/* Creating new combination of captcha symbols on the screen */
-
-function newSymbols(numberClicked) {
 	const pos1 = document.querySelector('#symbol1');
 	const pos2 = document.querySelector('#symbol2');
 	const pos3 = document.querySelector('#symbol3');
 	const pos4 = document.querySelector('#symbol4');
 	const pos5 = document.querySelector('#symbol5');
-	
-		
+			
 	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
 	let symbolString = [];
 
 	function resetAll() {
-		document.querySelector('.noise').style.backgroundImage = '';				
-		for (let i = 1; i <= symbolsArray.length; i++) {
-			document.querySelector(`#symbol${i}`).style.filter = 'blur(0px)';
-			document.querySelector(`#symbol${i}`).style.transform = 'rotateZ(0deg)';
-			document.querySelector(`#symbol${i}`).style.fontSize = '60px';
-		}
+		symbolGet();
+		
+		/* Return all symbols to default level 1 (after using reset button) */
+		document.querySelector('.noise').style.backgroundImage = '';
+		symbolColor();
+		symbolTransform();
+		filterRemove();
+		symbolFontsize();
 	};
   
+/* Randomizing symbols and display them on the captcha screen */
+	function symbolGet() {
+		for (let i = 0; i < symbolsArray.length; i++) {
+			let highLow = Math.random();
+			let symbolCode = undefined;
+
+			/* 'highLow' values (< 0.5 or > 0.5) in Math.random() ranges describes 50% chance for getting digit or letter every time. 'symbolCode' ranges 48-57 and 65-90 are for getting HTML charcode symbols (&#48-&#57 for digits and &#65-&#90 for letters) */
+			highLow < 0.5 ? symbolCode = Math.ceil(Math.random() * 9 + 48) : symbolCode = Math.ceil(Math.random() * 25 + 65);
+
+			/* 'innerHTML' instead 'textContent', because only 'innerHTML' generates proper string form on output */
+			symbolsArray[i].innerHTML = `&#${symbolCode}`;
+			symbolString.push(String.fromCharCode(symbolCode));
+		}		
+	}
+
+	function symbolColor() {
+		for (let i = 0; i < symbolsArray.length; i++) {
+				let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
+				let randomColor = Math.floor(Math.random() * 8);
+				symbolsArray[i].style.color = `${inputColor[randomColor]}`;
+		}	
+	}
+
+	function symbolTransform() {
+		for (let i = 0; i < symbolsArray.length; i++) {
+				/* Transforming every symbol independently */
+				let x = Math.floor(Math.random() * 10 + 15);
+				let y = Math.floor(Math.random() * 5 + 10);
+				let z = Math.floor(Math.random() * 20 - 10);
+				symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
+		}	
+	}
+
+	function filterRemove() {
+		for (let i = 0; i < symbolsArray.length; i++) {
+			symbolsArray[i].style.filter = 'blur(0px)';
+		}	
+	}
+
+	function symbolFontsize() {
+		for (let i = 1; i <= symbolsArray.length; i++) {
+			symbolsArray[i].style.fontSize = '60px';
+		}
+	}
+
 	const resetBtn = document.querySelector('#update');
 	resetBtn.addEventListener('click', resetAll, false);
-	
+
+/* Creating new combination of captcha symbols on the screen */
+
+function newSymbols(numberClicked) {
+	/* New symbols with level 1 (after using any star) */
+	symbolGet();
+	symbolColor();
+	symbolTransform();
 	
 	// level is one number bigger than clicked star (index rules)
 	let level = numberClicked;
-console.log(`lvl - ${level}`);
+	console.log(`lvl - ${level}`);
+	
 	// Normal level
 	if (level >= 2) {
 		document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
 	}
 
-	for (let i = 0; i < symbolsArray.length; i++) {
-		let highLow = Math.random();
-		let mySign = undefined;
-		
-		/* 'highLow' values (< 0.5 or > 0.5) in Math.random() range describes 50% chance for getting digit or letter every time */
-		highLow < 0.5 ? mySign = Math.ceil(Math.random() * 9 + 48) : mySign = Math.ceil(Math.random() * 25 + 65);
-		
-		/* 'mySign' ranges 48-57 and 65-90 are for HTML charcode signs (numbers or digits respectively) */
-		
-		/* 'innerHTML' instead 'textContent', because only 'innerHTML' generates proper string form on output */
-		symbolsArray[i].innerHTML = `&#${mySign}`;
-		symbolString.push(String.fromCharCode(mySign));
-		
-
-		let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
-		let randomColor = Math.floor(Math.random() * 8);
-		symbolsArray[i].style.color = `${inputColor[randomColor]}`;
-
-		/* Transforming every symbol independently */
-		let x = Math.floor(Math.random() * 10 + 15);
-		let y = Math.floor(Math.random() * 5 + 10);
-		let z = Math.floor(Math.random() * 20 - 10);
-		symbolsArray[i].style.transform = `translate(${x}px,${y}px) rotate(${z}deg)`;
+	for (let i = 0; i < symbolsArray.length; i++) {		
 
 		// Hard level
 		if (level >= 3) {
@@ -185,7 +207,5 @@ function compareText() {
 		answerArea.style.backgroundColor = 'rgba(219, 63, 63, 0.92)';
 	}
 }
-
-/*document.querySelector('#update').addEventListener('click', resetAll, false);*/
 
 document.querySelector('#checkcode').addEventListener('click', compareText, false);
