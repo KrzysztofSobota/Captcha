@@ -1,7 +1,7 @@
-html, body {
+body, html {
   margin: 0;
   padding: 0;
-  background: linear-gradient(90deg, hsl(45, 14%, 51%) 0%, hsl(220, 50%, 19%) 50%, hsl(45, 14%, 51%) 100%);
+	font-size: 16px;
 }
 
 * {
@@ -10,8 +10,7 @@ html, body {
 }
 
 .container {
-  width: 960px;
-  margin: 0 auto -20px auto;
+  width: 100%;
   background-color: hsl(45, 15%, 92%);
 }
 
@@ -22,9 +21,9 @@ h2, h3 {
   color: hsl(214, 75%, 21%);
 }
 
-h1 { font-size: 2em; height: auto; margin: 0;}
-h2 { font-size: 1.5em;}
-h3 { font-size: 1.25em;}
+h1 { font-size: 2em; margin: 0;}
+h2 { font-size: 1.6em;}
+h3 { font-size: 1.35em;}
 
 a {
   text-decoration: none;
@@ -47,7 +46,7 @@ p {
 
 .main-header {
   width: 100%;
-  height: 120px;
+  height: auto;
   align-content: center;
   background-color: hsl(214, 75%, 23%);
 }
@@ -59,10 +58,13 @@ p {
 
 .gamename {
   justify-content: center;
-  padding-left: 25px;
-  margin-bottom: 8px;
-  font-size: 75px;
+	margin: 1rem;
+  font-size: 5rem;
   color: hsl(55, 71%, 50%);
+}
+
+h1 > img {
+	height: 3.5rem;
 }
 
 main, article, section {
@@ -72,28 +74,28 @@ main, article, section {
 }
 
 main {
-  padding: 10px 15px;
+  padding: 15px;
   margin-bottom: 70px;
 }
 
 section {
   margin: 15px 0;
-	padding: 0 10px;
 }
 
 table {
-  width: 400px;
+  width: 25rem;
   margin: 15px;
   border-collapse: collapse;
+	font-size: 1.125rem;
 }
 
 th, td {
   text-align: left;
-  padding: 3px 8px;
+  padding: 0.25rem 0.5rem;
 }
 
 th {
-  height: 2em;
+  height: 2.25em;
   background-color: hsl(226, 87%, 79%);
   border-bottom: 1px solid black;
 }
@@ -102,24 +104,33 @@ th:first-of-type, td:first-of-type {
   border-right: 1px solid black
 }
 
+th:last-child, td:last-child {
+	width: 70%;
+}
+
 tr:nth-child(even) {
   background-color: hsl(0, 4%, 84%);
 }
 
 .stars, .captcha, .codearea {
 	display: flex;
-	margin: 10px auto;
   width: 500px;
+	margin: 10px auto;
+}
+
+.stars {
+	height: 60px;
 }
 
 .answer {
-	display: block;
-	float: left;
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
 }
 
 .answer > input {
-  height: 50px;
-  font-size: 24px;
+  height: 3.25rem;
+  font-size: 1.5rem;
 }
 
 .captcha {  
@@ -127,10 +138,13 @@ tr:nth-child(even) {
 	height: 100px;
 }
 
+.game-level, input[type='image'] {
+  height: auto;	
+}
+
 .game-level {
   display: flex;
   width: 300px;
-  height: 100%;
 }
 
 .yellow {
@@ -139,7 +153,6 @@ tr:nth-child(even) {
 
 input[type='image'] {
   width: 60px;
-  height: auto;
 }
 
 .level-block {
@@ -154,7 +167,7 @@ input[type='image'] {
 }
 
 .level-block > span {
-  font-size: 18px;
+  font-size: 1.3rem;
 }
 
 .noise {
@@ -163,7 +176,7 @@ input[type='image'] {
 
 .symbol {
 	width: 18%;
-	font: normal 60px 'Arial';
+	font: normal 4rem 'Arial';
 	background-color: transparent;
   border-color: transparent;
 	float: left;
@@ -171,10 +184,9 @@ input[type='image'] {
 
 .reset {
   width: 100px;
-	height: 100%;
-  border-width: 0;
+  border: thin solid gray;
 	background-image: url(/reset-button.svg);
-	background-size: contain;
+	background-size: cover;
 	cursor: pointer;
 }
 
@@ -183,25 +195,24 @@ input[type='image'] {
 }
 
 label > span {
-  display: inline-block;
+  display: block;
   width: 100%;
-  font-size: 18px;
-	padding: 10px 0;
+  font-size: 1.2rem;
+	padding: 5px 0;
 }
 
 input[type='text'] {
-  max-width: 300px;
+  flex: 1 1 150px;
 }
 
 input[type='submit'] {
-  width: auto;
+  flex-basis: 10rem;
 	margin-left: 3px;
 	background-color: hsl(215, 87%, 76%);
 	border: 4px outset hsl(228, 5%, 55%);
 }
 
 input[type='submit']:hover {
-	background-color: hsl(215, 87%, 76%);
 	border: 4px inset hsl(228, 5%, 55%);
 }
 
@@ -222,70 +233,62 @@ footer > span {
   font-style: italic;
 }
 
-@media screen and (min-width: 768px) and (max-width: 959px) {
+@media screen and (min-width: 961px) {
+	html, body {
+		background: linear-gradient(90deg, hsl(45, 14%, 51%) 0%, hsl(220, 50%, 19%) 50%, hsl(45, 14%, 51%) 100%);
+  }
+	
 	.container {
-    width: 100%;
+    width: 960px;
+		margin: 0 auto;
   }
 }
 
-@media screen and (min-width: 480px) and (max-width: 768px) {
+@media screen and (min-width: 720px) {
+	table {
+		margin: 15px 25px;
+	}
+}
+	
+@media screen and (min-width: 480px) and (max-width: 719px) {
   body, html {
     font-size: 14px;
-  }
-	
-	.container {
-    width: 100%;
-  }
-	
-  .main-header {
-    height: 100px;
-  }
-	
-  h1 > img {
-    height: 50px;
-  }
-  
-  .gamename {
-    font-size: 60px;
-  }
-	
+  }		
+  	
   main {
-		padding: 8px;
+		padding: 10px;
   }
   	
   .stars, .captcha, .codearea {
 		width: 450px;
   }
-
+	
+	.game-level, input[type='image'], .level-block {
+		height: 54px;
+	}
+	
   input[type='image'] {
 		width: 54px;
 	}
-
-	.game-level, input[type='image'] {
-    height: auto;
-  }
+	
+	.level-block {
+		width: 180px;
+		margin: 0;
+	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 320px) and (max-width: 479px) {
   body, html {
     font-size: 12px;
   }
 	
-  .container {
-    width: 100%;
-  }
-  
-  .main-header {
-    height: 80px;
-  }
-	
   h1 > img {
-    height: 32px;
+    height: 3rem;
   }
   
   .gamename {
-    font-size: 48px;
-    padding-left: 10px;
+		margin: 1rem 0 1rem 0.5rem;
+    font-size: 4.25rem;
   }
 	
   main {
@@ -296,21 +299,15 @@ footer > span {
 		padding: 0;
 	}
 	
-	section {
-		margin: 5px 0;
-	}
-  	
-  table {
-		max-width: 290px;
-		margin: 10px 5px;
-		font-size: 14px;
-  }
-  
-  th, td {
-		padding: 3px 5px;
+	section, table {
+		margin: 10px auto;
+	}  
+	
+	.level-block > span {
+		font-size: 1.5rem;
 	}
 	
-  .stars, .captcha, .codearea, .level-block, .game-level {
+  .stars, .captcha, .codearea, .level-block, table {
 		width: 300px;		
   }
 
@@ -318,43 +315,29 @@ footer > span {
 		height: 70px;
 	}
 	
-	.codearea {
-		margin: 0 auto 20px;
+	.symbol {
+		font: normal 3.75rem 'Arial';
 	}
 	
-	.game-level, input[type='image'] {
-    height: auto;
-  }
-  
   .stars {
     flex-flow: row wrap;
+		height: auto;
   }
   
   .level-block {
     height: 50px;
     order: -1;
-		margin: 0 0 10px 0;
+		margin: 0 0 6px 0;
   }
-
-	.symbol {
-		font: normal 42px 'Arial';
-	}
 	
   .reset {
     width: 70px;
-    height: 70px;
   }  
   
-	label > span {
-		font-size: 14px;
-		padding: 0 0 5px 0;
+	input[type="text"] {
+		max-width: 175px;
 	}
-
-	input[type='text'], input[type='submit'] {
-		font-size: 15px;
-		height: 40px;
-	}
- 
+	
   footer {
     height: 50px;
   }

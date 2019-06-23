@@ -6,14 +6,14 @@ window.addEventListener('DOMContentLoaded', newSymbols, false);
 /* Change level of the game depending on user choice */
 
 function changeStars() {
-	/*  */
+	/* Displaying level text inside blue box */
 	const updateAltText = currentLevelIndex => {
 		let levelText = document.querySelector('#level-text');
 		/* 'currentLevelIndex + 1' replaces event 'currentElement' */
 		levelText.textContent = document.querySelector(`#star${currentLevelIndex + 1}`).alt;
 	}
 	
-	/* Level number - default is 1 */
+	/* Captcha level number - default is 1 */
 	const getNumber = str => Number(str.match(/\d+/)[0]) || 1;
 	
 	/* Star index is always one number lower than level number (indexing rules) */
@@ -21,27 +21,27 @@ function changeStars() {
 	
 	let stars = document.querySelectorAll('.star');
 	
-	const handleStarClick = event => {
+	const handleStarClick = event => {		
 		/* FIRST - blocking possibility to change any star behaviour from mouseover and mouseout events */
 		gameLevel.removeEventListener('mouseover', highlightStars);
 		gameLevel.removeEventListener('mouseout', highlightStars);
 		
 		/* SECOND - making all needed star with yellow color */
 		const stars = document.querySelectorAll('.star');
-		for (let i = 0; i <= getStarIndex(event); i++) {
-			stars[i].classList.add('yellow');
-		}
-
+			for (let i = 0; i <= getStarIndex(event); i++) {
+				stars[i].classList.add('yellow');
+			}
 		/* THIRD - trigger newSymbols() function with parameter equal to chosen level (star) */
 		const levelNumber = getNumber(event.target.id);
+		
 		
 		newSymbols(levelNumber);
 	};
 
 	const highlightStars = event => {
-		const starIndex = getStarIndex(event);
+		const starIndex = getStarIndex(event);			
 		updateAltText(starIndex);
-		for (let i = 1; i <= starIndex; i++) {
+		for (let i = 0; i <= starIndex; i++) {
 			const star = document.querySelector(`#star${i + 1}`);
 			star.classList.toggle('yellow');
 		}
@@ -51,28 +51,34 @@ function changeStars() {
 		let target = event.target.className;
 		
 		if (target === 'star' || target === 'stars') {
-//			updateAltText(0);
+
 		}
 	};
 	
-//	document.addEventListener("mouseover", behindArea);
+const defaultLevel = event => {
+				stars[0].classList.toggle('yellow');
+					stars[0].classList.add('yellow');
+	updateAltText(0);
+			newSymbols(1);
+		
+}
 	
-	
-	 // update current level text updateAltText(0);
 	const gameLevel = document.querySelector('.game-level');
 	gameLevel.addEventListener("mouseover", highlightStars);
 	gameLevel.addEventListener("mouseout", highlightStars);
 	gameLevel.addEventListener('click', handleStarClick, {once: true});
 	gameLevel.addEventListener("mouseout", behindArea);
+	
+	const resetBtn = document.querySelector('#update');
+	resetBtn.addEventListener('click', defaultLevel, false);
 }
 
-	const pos1 = document.querySelector('#symbol1');
-	const pos2 = document.querySelector('#symbol2');
-	const pos3 = document.querySelector('#symbol3');
-	const pos4 = document.querySelector('#symbol4');
-	const pos5 = document.querySelector('#symbol5');
-			
-	let symbolsArray = [pos1, pos2, pos3, pos4, pos5];
+				
+	let symbolsArray = [];
+	for (let i = 1; i <= 5; i++) {
+		symbolsArray.push(document.querySelector(`#symbol${i}`));
+	}
+
 	let symbolString = [];
 
 	function resetAll() {
@@ -89,11 +95,11 @@ function changeStars() {
 /* Randomizing symbols and display them on the captcha screen */
 	function symbolGet() {
 		for (let i = 0; i < symbolsArray.length; i++) {
-			let highLow = Math.random();
+			let symbolTaken = Math.random();
 			let symbolCode = undefined;
 
-			/* 'highLow' values (< 0.5 or > 0.5) in Math.random() ranges describes 50% chance for getting digit or letter every time. 'symbolCode' ranges 48-57 and 65-90 are for getting HTML charcode symbols (&#48-&#57 for digits and &#65-&#90 for letters) */
-			highLow < 0.5 ? symbolCode = Math.ceil(Math.random() * 9 + 48) : symbolCode = Math.ceil(Math.random() * 25 + 65);
+			/* 'symbolTaken' values (< 0.5 or > 0.5) in Math.random() ranges describes 50% chance for getting digit or letter every time. 'symbolCode' ranges 48-57 and 65-90 are for getting HTML charcode symbols (&#48-&#57 for digits and &#65-&#90 for letters) */
+			symbolTaken < 0.5 ? symbolCode = Math.ceil(Math.random() * 9 + 48) : symbolCode = Math.ceil(Math.random() * 25 + 65);
 
 			/* 'innerHTML' instead 'textContent', because only 'innerHTML' generates proper string form on output */
 			symbolsArray[i].innerHTML = `&#${symbolCode}`;
@@ -126,21 +132,18 @@ function changeStars() {
 	}
 
 	function symbolFontsize() {
-		for (let i = 1; i <= symbolsArray.length; i++) {
+		for (let i = 0; i < symbolsArray.length; i++) {
 			symbolsArray[i].style.fontSize = '60px';
 		}
 	}
 
-	const resetBtn = document.querySelector('#update');
-	resetBtn.addEventListener('click', resetAll, false);
+	
 
 /* Creating new combination of captcha symbols on the screen */
 
 function newSymbols(numberClicked) {
-	/* New symbols with level 1 (after using any star) */
-	symbolGet();
-	symbolColor();
-	symbolTransform();
+	/* New symbols with level 1 */
+	resetAll();
 	
 	// level is one number bigger than clicked star (index rules)
 	let level = numberClicked;
