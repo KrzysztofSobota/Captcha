@@ -32,42 +32,54 @@ function changeStars() {
 				stars[i].classList.add('yellow');
 			}
 		/* THIRD - trigger newSymbols() function with parameter equal to chosen level (star) */
-		const levelNumber = getNumber(event.target.id);
-		
+		const levelNumber = getNumber(event.target.id);		
 		
 		newSymbols(levelNumber);
 	};
 
 	const highlightStars = event => {
-		const starIndex = getStarIndex(event);			
-		updateAltText(starIndex);
+		const active = event.target;
+		const starIndex = 0;
+		if (active.matches('#update')) {
+			starIndex = 0;			
+			updateAltText(0);				
+		}
+		else if (active.matches('.stars')) {
+			starIndex = getStarIndex(event);			
+			updateAltText(starIndex);
+		}
+		
 		for (let i = 0; i <= starIndex; i++) {
 			const star = document.querySelector(`#star${i + 1}`);
 			star.classList.toggle('yellow');
 		}
 	};
 
-	const behindArea = event => {
+	/* Text inside blue box return to default ('Easy level') when mouse cursor leave any star area */
+	const behindStarArea = event => {
 		let target = event.target.className;
 		
 		if (target === 'star' || target === 'stars') {
-
+			updateAltText(0);
 		}
 	};
 	
-const defaultLevel = event => {
-				stars[0].classList.toggle('yellow');
-					stars[0].classList.add('yellow');
-	updateAltText(0);
-			newSymbols(1);
+	const defaultLevel = event => {
+		const active = event.target;
+		let stars = document.querySelectorAll('.star');
 		
-}
+		console.log(stars);
+		updateAltText(0);
+		newSymbols(1);
+
+	};
+	
 	
 	const gameLevel = document.querySelector('.game-level');
 	gameLevel.addEventListener("mouseover", highlightStars);
 	gameLevel.addEventListener("mouseout", highlightStars);
 	gameLevel.addEventListener('click', handleStarClick, {once: true});
-	gameLevel.addEventListener("mouseout", behindArea);
+	gameLevel.addEventListener("mouseout", behindStarArea);
 	
 	const resetBtn = document.querySelector('#update');
 	resetBtn.addEventListener('click', defaultLevel, false);
@@ -75,8 +87,7 @@ const defaultLevel = event => {
 
 				
 	let symbolsArray = [];
-	for (let i = 1; i <= 5; i++) {
-		symbolsArray.push(document.querySelector(`#symbol${i}`));
+	for (let i = 1; i <= 5; i++) {		symbolsArray.push(document.querySelector(`#symbol${i}`));
 	}
 
 	let symbolString = [];
@@ -133,7 +144,7 @@ const defaultLevel = event => {
 
 	function symbolFontsize() {
 		for (let i = 0; i < symbolsArray.length; i++) {
-			symbolsArray[i].style.fontSize = '60px';
+			symbolsArray[i].style.fontSize = '4rem';
 		}
 	}
 
