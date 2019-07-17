@@ -9,7 +9,7 @@ function changeStars() {
 	/* Displaying level text inside blue box */
 	const updateAltText = currentLevelIndex => {
 		let levelText = document.querySelector('#level-text');
-		/* 'currentLevelIndex + 1' replaces event 'currentElement' */
+		
 		levelText.textContent = document.querySelector(`#star${currentLevelIndex + 1}`).alt;
 	}
 	
@@ -18,76 +18,96 @@ function changeStars() {
 	
 	/* Star index is always one number lower than level number (indexing rules) */
 	const getStarIndex = event => getNumber(event.target.id) - 1;
-	
-	let stars = document.querySelectorAll('.star');
-	
-	const handleStarClick = event => {		
-		/* FIRST - blocking possibility to change any star behaviour from mouseover and mouseout events */
-		gameLevel.removeEventListener('mouseover', highlightStars);
-		gameLevel.removeEventListener('mouseout', highlightStars);
+			
+	const stars = document.querySelectorAll('.star');
+	const img1 = "Symbol_Star(color).png";
+	const img2 = "Symbol_Star.png";
+
+	/* function imageChange() {
 		
-		/* SECOND - making all needed star with yellow color */
-		const stars = document.querySelectorAll('.star');
-			for (let i = 0; i <= getStarIndex(event); i++) {
-				stars[i].classList.add('yellow');
+		stars[i].src = img1;
+
+	} */
+
+	const handleStarClick = event => {		
+		/* FIRST - blocking mouseover and mouseout events
+		after clicking any star by user */
+		let starIndex = undefined;
+
+		if (event.target.matches('#update')) {
+			starIndex = 0;
+			gameLevel.addEventListener('mouseover', highlightStars);
+			gameLevel.addEventListener('mouseout', highlightStars);
+		} 
+		else if (event.target.matches('.star')) {
+			starIndex = getStarIndex(event);
+			gameLevel.removeEventListener('mouseover', highlightStars);
+			gameLevel.removeEventListener('mouseout', highlightStars);
+		}
+		
+		console.log(getStarIndex(event));
+		/* SECOND - all chosen star are filled with yellow color */		
+			for (let i = 1; i <= starIndex; i++) {				
+				stars[i].src = img1;
 			}
-		/* THIRD - trigger newSymbols() function with parameter equal to chosen level (star) */
-		const levelNumber = getNumber(event.target.id);		
+
+		/* THIRD - trigger newSymbols() function with parameter equal to chosen level */
+		const levelNumber = starIndex + 1;		
 		
 		newSymbols(levelNumber);
 	};
 
+
 	const highlightStars = event => {
-		const active = event.target;
-		const starIndex = 0;
-		if (active.matches('#update')) {
-			starIndex = 0;			
-			updateAltText(0);				
-		}
-		else if (active.matches('.stars')) {
-			starIndex = getStarIndex(event);			
-			updateAltText(starIndex);
-		}
+		let starIndex = getStarIndex(event);			
+		updateAltText(starIndex);
 		
-		for (let i = 0; i <= starIndex; i++) {
-			const star = document.querySelector(`#star${i + 1}`);
-			star.classList.toggle('yellow');
-		}
+			for (let i = 1; i <= starIndex; i++) {
+				if (stars[i].src == img2) {
+					stars[i].src = img1;
+				}
+				else {
+					stars[i].src = img2;
+				}
+			}
 	};
 
-	/* Text inside blue box return to default ('Easy level') when mouse cursor leave any star area */
+	/* Text inside blue box return to default ('Easy level') when mouse cursor leave any of star area */
 	const behindStarArea = event => {
 		let target = event.target.className;
 		
 		if (target === 'star' || target === 'stars') {
-			updateAltText(0);
+			updateAltText(0);			
 		}
 	};
-	
-	const defaultLevel = event => {
-		const active = event.target;
-		let stars = document.querySelectorAll('.star');
 		
-		console.log(stars);
-		updateAltText(0);
-		newSymbols(1);
-
-	};
-	
 	
 	const gameLevel = document.querySelector('.game-level');
-	gameLevel.addEventListener("mouseover", highlightStars);
-	gameLevel.addEventListener("mouseout", highlightStars);
-	gameLevel.addEventListener('click', handleStarClick, {once: true});
-	gameLevel.addEventListener("mouseout", behindStarArea);
-	
+	gameLevel.addEventListener('mouseover', highlightStars);
+	gameLevel.addEventListener('mouseout', highlightStars);
+	gameLevel.addEventListener('click', handleStarClick, {once:true});
+	gameLevel.addEventListener('mouseout', behindStarArea);
+
+	const defaultLevel = () => {
+		// let defaultNumber = getNumber('1');
+			for (let i = 1; i <= 4; i++) {
+				stars[i].src = img2;
+			}
+		
+		updateAltText(0);
+		newSymbols(1);
+	};
+
 	const resetBtn = document.querySelector('#update');
-	resetBtn.addEventListener('click', defaultLevel, false);
+	resetBtn.addEventListener('click', defaultLevel);
+	resetBtn.addEventListener('click', handleStarClick);
 }
 
-				
+/*** Main array where symbols after  ***/
 	let symbolsArray = [];
-	for (let i = 1; i <= 5; i++) {		symbolsArray.push(document.querySelector(`#symbol${i}`));
+
+	for (let i = 1; i <= 5; i++) {
+		symbolsArray.push(document.querySelector(`#symbol${i}`));
 	}
 
 	let symbolString = [];
@@ -105,24 +125,26 @@ function changeStars() {
   
 /* Randomizing symbols and display them on the captcha screen */
 	function symbolGet() {
-		for (let i = 0; i < symbolsArray.length; i++) {
-			let symbolTaken = Math.random();
-			let symbolCode = undefined;
+		let symbolCode = undefined;
+			for (let i = 0; i < symbolsArray.length; i++) {
+				let digitLetter = Math.random();
 
-			/* 'symbolTaken' values (< 0.5 or > 0.5) in Math.random() ranges describes 50% chance for getting digit or letter every time. 'symbolCode' ranges 48-57 and 65-90 are for getting HTML charcode symbols (&#48-&#57 for digits and &#65-&#90 for letters) */
-			symbolTaken < 0.5 ? symbolCode = Math.ceil(Math.random() * 9 + 48) : symbolCode = Math.ceil(Math.random() * 25 + 65);
+				/* 'digitLetter' values are between two Math.random() ranges (0 < symbolTaken < 0.5 or 0.5 > symbolTaken > 1).
+				This describes 50% chance for getting digit or letter every time. 'symbolCode' ranges 48-57 and 65-90 are for getting HTML charcode symbols (&#48-&#57 for digits and &#65-&#90 for letters) */
+				digitLetter < 0.5 ? symbolCode = Math.ceil(Math.random() * 9 + 48) : symbolCode = Math.ceil(Math.random() * 25 + 65);
 
-			/* 'innerHTML' instead 'textContent', because only 'innerHTML' generates proper string form on output */
-			symbolsArray[i].innerHTML = `&#${symbolCode}`;
-			symbolString.push(String.fromCharCode(symbolCode));
-		}		
+				/* Making a symbol from HTML character code and put it into an array */
+				symbolsArray[i].innerHTML = `&#${symbolCode}`;
+				symbolString.push(String.fromCharCode(symbolCode));
+			}
 	}
 
 	function symbolColor() {
+		let inputColor = ['#ff4d4d', 'red', 'blue', 'green', '#00cccc',
+		 'darkblue', '#563412', '#ffff66', '#b3b300', '#34740b', '#660066', '#ffbf80'];
 		for (let i = 0; i < symbolsArray.length; i++) {
-				let inputColor = ['pink', 'red', 'blue', 'green', 'cyan', 'darkblue', '#563412', '#d6db54'];
-				let randomColor = Math.floor(Math.random() * 8);
-				symbolsArray[i].style.color = `${inputColor[randomColor]}`;
+			let randomColor = Math.floor(Math.random() * inputColor.length);
+			symbolsArray[i].style.color = `${inputColor[randomColor]}`;
 		}	
 	}
 
@@ -156,28 +178,28 @@ function newSymbols(numberClicked) {
 	/* New symbols with level 1 */
 	resetAll();
 	
-	// level is one number bigger than clicked star (index rules)
-	let level = numberClicked;
-	console.log(`lvl - ${level}`);
 	
-	// Normal level
+	let level = numberClicked; // level is one number bigger than clicked star (index rules)
+	console.log(`level = ${level}`);
+	
+	/* Normal level */
 	if (level >= 2) {
 		document.querySelector('.noise').style.backgroundImage = `url(/noise.svg)`;
 	}
 
 	for (let i = 0; i < symbolsArray.length; i++) {		
 
-		// Hard level
+	/* Hard level */
 		if (level >= 3) {
 			symbolsArray[i].style.filter = `blur(5px)`;
 		}
 
-		// Very hard level
+	/* Very hard level */
 		if (level >= 4) {
 			symbolsArray[i].style.transform = `rotateZ(180deg)`;
 		}
 
-		// Impossible level
+	/* Impossible level */
 		if (level === 5) {
 			let browserWidth = window.innerWidth;
 
@@ -188,6 +210,7 @@ function newSymbols(numberClicked) {
 				return newFontSize;
 			}
 
+		/* New font size depends on recently screen width */
 			if (browserWidth <= 480) {
 				FontChange(20, 30); // new font size range 30-50 px
 			} 
@@ -210,15 +233,17 @@ function compareText() {
 	let answerArea = document.querySelector('#writecode');
 	let inputText = answerArea.value;
 
-	for (let a = 0; a <= 4; a++) {
+	for (let a = 0; a < onesign.length; a++) {
 		text += onesign[a].innerText;
 	}
-
+	
+/* Input area displays blue/red color after good/bad answer respectively */
 	if (text == inputText) {
-		alert('Great job !!!');
+		answerArea.style.border = '1px solid rgb(5, 28, 97)';
+		answerArea.style.backgroundColor = 'rgb(110, 144, 247)';
 	} else {
-		answerArea.style.border = 'thin solid #ff0000';
-		answerArea.style.backgroundColor = 'rgba(219, 63, 63, 0.92)';
+		answerArea.style.border = '1px solid rgb(255, 0, 0)';
+		answerArea.style.backgroundColor = 'rgb(219, 63, 63)';
 	}
 }
 

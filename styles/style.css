@@ -147,10 +147,6 @@ tr:nth-child(even) {
   width: 300px;
 }
 
-.yellow {
-  background: url('/Symbol_Star(color).png') no-repeat center;
-}
-
 input[type='image'] {
   width: 60px;
 }
